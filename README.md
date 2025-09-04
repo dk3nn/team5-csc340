@@ -24,6 +24,12 @@ A platform designed to guide Customers through a seamless transition into a new 
     vii. Rate and review sellers
 
 2. Provider:
+    i.   Create/modify/remove provider profile - Register as a Dealship Owner.
+    ii.  Create services - Add cars to available inventory.
+    iii. View statistics - View Deals and statistics.
+    iv.  Manage Finances - View pending and due payments.
+    v.   Reply to reviews - Reply to feedback.
+
 
 
 3. System Admin:
