@@ -2,7 +2,7 @@
 ## For <Auto-Pick>
 
 Version 0.1  
-Prepared by <Davin Kennaley, >  
+Prepared by <Davin Kennaley, Danial Asif>  
 <CSC 340, Group 5>  
 <September 19, 2025> 
 
