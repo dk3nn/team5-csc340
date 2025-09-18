@@ -123,21 +123,23 @@ SpringBoot 3.4.5
 
 #### 3.2.1 Performance
 
+NFR0: The Auto-Pick system will consume less than 50 MB of memory
+NFR1: A novice user will be able to browse cars, view details, and contact the dealership in less than 5 minutes.
+NFR2: An expert user will be able to complete the browse cars, view details, and complete contact the dealership tasks in less than 2 minutes.
 
 #### 3.2.2 Security
-
+NFR3: Only authorized provider (dealer) will be able to make changes to the inventory, requiring secure authentication via username and password.
 
 #### 3.2.3 Reliability
 
-
 #### 3.2.4 Availability
-
+NFR4: Auto-Pick App will be available 24/7, with no more than 2 hours of scheduled downtime per month for maintenance and updates.
 
 #### 3.2.5 Compliance
 
-
 #### 3.2.6 Cost
-
+NFR5: We expect to spend zero dollars on this project.
 
 #### 3.2.7 Deadline
+NFR6: The final product must be delivered by December 2025.
 
