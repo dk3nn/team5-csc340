@@ -105,22 +105,22 @@ Describe the connections between this product and other specific software compon
 ### 3.2 Non Functional Requirements 
 
 #### 3.2.1 Performance
-If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
+NFR0: The Auto-Pick system will consume less than 50 MB of memory
+NFR1: A novice user will be able to browse cars, view details, and contact the dealership in less than 5 minutes.
+NFR2: An expert user will be able to complete the browse cars, view details, and complete contact the dealership tasks in less than 2 minutes.
 
 #### 3.2.2 Security
-Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
+NFR3: Only authorized provider (dealer) will be able to make changes to the inventory, requiring secure authentication via username and password.
 
 #### 3.2.3 Reliability
-Specify the factors required to establish the required reliability of the software system at time of delivery.
 
 #### 3.2.4 Availability
-Specify the factors required to guarantee a defined availability level for the entire system such as checkpoint, recovery, and restart.
+NFR4: Auto-Pick App will be available 24/7, with no more than 2 hours of scheduled downtime per month for maintenance and updates.
 
 #### 3.2.5 Compliance
-Specify the requirements derived from existing standards or regulations
 
 #### 3.2.6 Cost
-Specify monetary cost of the software product.
+NFR5: We expect to spend zero dollars on this project.
 
 #### 3.2.7 Deadline
-Specify schedule for delivery of the software product.
+NFR6: The final product must be delivered by December 2025.
