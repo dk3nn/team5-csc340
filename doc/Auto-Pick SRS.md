@@ -44,34 +44,33 @@ Table of Contents
 ## 1. Introduction
 
 ### 1.1 Document Purpose
-The purpose of this Software Requirements Document (SRD) is to describe the client-view and developer-view requirements for the Auto-Pick application.
-Client-oriented requirements describe the system from the client’s perspective. These requirements include a description of the different types of users served by the system.
-Developer-oriented requirements describe the system from a software developer’s perspective. These requirements include a detailed description of functional, data, performance, and other important requirements.
+The purpose of this Software Requirements Document is to outline the system requirements for the Auto-Pick application from both the client’s and the developer’s perspectives. Client-oriented requirements present the system from the user’s viewpoint, detailing the various types of users the system is designed to serve. Developer-oriented requirements provide a detailed overview of the system from a technical perspective, covering functional, data, performance, and other critical aspects of the application.
 
 ### 1.2 Product Scope
-The purpose of the Auto-Pick system is to assist users in either finding a vehicle or selling a vehicle and to create a convenient and easy-to-use application for every parties involved in the car buying process. The system is a web-based application to simplify its vehicle management, and vehicle discovory functions. We will have a server supporting sellers of different vehicles. Above all, we hope to provide a comfortable user experience along with the best offerings available.
+The purpose of the Auto-Pick system is to help users find or sell vehicles at a specific dealership in a simple and convenient way. It’s a web-based platform designed to make vehicle management and discovery easier for both buyers and the dealership. The system will be focused on supporting the dealership's inventory, allowing them to list and manage their cars. Our goal is to provide a smooth, user-friendly experience while offering the best vehicle options and deals available from the dealership.
 
 ### 1.3 Definitions, Acronyms and Abbreviations                                                                                                                           
-| Reference  | Definition                                                                                                                                                                         |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Java       | A programming language originally developed by James Gosling at Sun Microsystems. We will be using this language to build the backend service for LocalHarvest Hub                 |
-| Postgresql | Open-source relational database management system.                                                                                                                                 |
-| SpringBoot | An open-source Java-based framework used to create a micro Service. This will be used to create and run our application.                                                           |
-| Spring MVC | Model-View-Controller. This is the architectural pattern that will be used to implement our system.                                                                                |
-| Spring Web | Will be used to build our web application by using Spring MVC. This is one of the dependencies of our system.                                                                      |
-| API        | Application Programming Interface. This will be used to interface the backend and the fronted of our application.                                                                  |
-| HTML       | Hypertext Markup Language. This is the code that will be used to structure and design the web application and its content.                                                         |
-| CSS        | Cascading Style Sheets. Will be used to add styles and appearance to the web app.                                                                                                  |
-| JavaScript | An object-oriented computer programming language commonly used to create interactive effects within web browsers.Will be used in conjuction with HTML and CSS to make the web app. |
-| VS Code    | An integrated development environment (IDE) for Java. This is where our system will be created.                                                                                    |
-|            |                                                             |
+| Reference   | Definition                                                                                                                                                                         |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Java        | A programming language originally developed by James Gosling at Sun Microsystems. We will be using this language to build the backend service for LocalHarvest Hub                 |
+| PostgreSQL  | Open-source relational database management system.                                                                                                                                 |
+| SpringBoot  | An open-source Java-based framework used to create a microservice. This will be used to create and run our application.                                                           |
+| Spring MVC  | Model-View-Controller. This is the architectural pattern that will be used to implement our system.                                                                                |
+| Spring Web  | Will be used to build our web application by using Spring MVC. This is one of the dependencies of our system.                                                                      |
+| API         | Application Programming Interface. This will be used to interface the backend and the frontend of our application.                                                                  |
+| HTML        | Hypertext Markup Language. This is the code that will be used to structure and design the web application and its content.                                                         |
+| CSS         | Cascading Style Sheets. Will be used to add styles and appearance to the web app.                                                                                                  |
+| JavaScript  | An object-oriented computer programming language commonly used to create interactive effects within web browsers. Will be used in conjunction with HTML and CSS to make the web app. |
+| VS Code     | An integrated development environment (IDE) for Java. This is where our system will be created.                                                                                    |
+
 
 ### 1.4 References
                                                                                       
 https://spring.io/guides
 https://www.nhtsa.gov/nhtsa-datasets-and-apis
+
 ### 1.5 Document Overview
-Section 1 is a general introduction to the document, intended for any readers. Section 2 is focused on the product and its features. This section is for customers and business stakeholders. Section 3 specifies the requirements and constraints for the product and development process. This section is intended for all stakeholders, especially the development team.
+Section 1 gives an overall introduction to the document for all readers. Section 2 describes the product and its features, mainly for customers and business stakeholders. Section 3 details the requirements and constraints for the product and development process, and is meant for all stakeholders, especially the development team.
 
 
 ## 2. Product Overview
@@ -92,21 +91,22 @@ We will be using Java, with our program and an exteranl NHTSA API to access gene
 ## 3. Requirements
 
 ### 3.1 Functional Requirements 
-*FR0: The system will allow users to create accounts as either customer or seller
-    * Each account will have a unique identifier at time of creation
-*FR1: The system shall allow customer accounts to browse through all available vehicles
-    * There should be filter and search options available
-*FR2: The system shall allow the customer to like/save available vehicles as they desire
-    * There should be a button to like/save attached to each vehicle
-*FR3: The system shall allow customers to contact sellers directly in app
-    * There should be a direct messaging system
-*FR4: All users shall be able to edit thier profile at any time
-*FR5: The system shall allow customers to leave ratings and reviews after purchasing a vehicle from seller
-*FR6: The system shall allow sellers to list vehicles for sale
-    * Sellers should be able to add information about their vehicle
-FR7: The system shall allow sellers to make vehicles available or unavailable
-FR8: The system shall allow sellers to veiw thier sale statistics
-    * The statistics section should include information shuch as total sales, total revenue, number of vehicle impressions, etc.
+* FR0: The system will allow users to create accounts as either customer or seller  
+    * Each account will have a unique identifier at time of creation  
+* FR1: The system shall allow customer accounts to browse through all available vehicles  
+    * There should be filter and search options available  
+* FR2: The system shall allow the customer to like/save available vehicles as they desire  
+    * There should be a button to like/save attached to each vehicle  
+* FR3: The system shall allow customers to contact sellers directly in app  
+    * There should be a direct messaging system  
+* FR4: All users shall be able to edit thier profile at any time  
+* FR5: The system shall allow customers to leave ratings and reviews after purchasing a vehicle from seller  
+* FR6: The system shall let sellers list vehicles for sale.  
+    * Sellers should be able to add and update details about their vehicles. 
+* FR7: The system shall let sellers set vehicles as available or unavailable.  
+* FR8: The system must allow sellers to view their sales statistics.  
+    * The statistics should include details like total sales, total revenue, and other key metrics.ber of vehicle impressions, etc. 
+* FR9: The system shall allow seller to reply to reviews. 
 
 #### 3.1.1 User interfaces
 Web pages using HTML, CSS, and JavaScript.
@@ -123,9 +123,9 @@ SpringBoot 3.4.5
 
 #### 3.2.1 Performance
 
-NFR0: The Auto-Pick system will consume less than 50 MB of memory
-NFR1: A novice user will be able to browse cars, view details, and contact the dealership in less than 5 minutes.
-NFR2: An expert user will be able to complete the browse cars, view details, and complete contact the dealership tasks in less than 2 minutes.
+NFR0: The Auto-Pick system will consume less than 50 MB of memory  
+NFR1: A novice user will be able to browse cars, view details, and contact the dealership in less than 5 minutes.  
+NFR2: An expert user will be able to complete the browse cars, view details, and complete contact the dealership tasks in less than 2 minutes.  
 
 #### 3.2.2 Security
 NFR3: Only authorized provider (dealer) will be able to make changes to the inventory, requiring secure authentication via username and password.
