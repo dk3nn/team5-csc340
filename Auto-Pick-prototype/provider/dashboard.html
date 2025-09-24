@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Dealership Seller Dashboard</title>
+  <link rel="stylesheet" href="../dashboard.css">
+  <link rel="stylesheet" href="../home.css">
+  <script src="../dashboard.js"></script>
+  <script src="../samplecardata.js"></script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <ul>
+      <li><button onclick="menuBtn('dashboard')" class="menu-btn">Dashboard</button></li>
+      <li><button onclick="menuBtn('inventory')" class="menu-btn">Inventory</button></li>
+      <li><button onclick="menuBtn('finance')" class="menu-btn">Finance</button></li>
+      <li><button onclick="menuBtn('add-new-car')" class="menu-btn">Add New Car</button></li>
+    </ul>
+  </div>
+
+
+  <div class="main-content">
+
+    <div id="content">
+      <div id="dashboard">
+        <div class="header">
+          <h1 style="margin-top: 0px;">Auto-Pick Seller Dashboard</h1>
+        </div>
+        <div class="dashboard-cards">
+            
+            <div class="card">
+                <h3>Total Cars Sold</h3>
+                <p>150</p>
+            </div>
+
+            
+            <div class="card">
+                <h3>Cars in the Shop</h3>
+                <p>35</p>
+            </div>
+
+            
+            <div class="card">
+                <h3>Total Profit</h3>
+                <p>$500,000</p>
+            </div>
+
+            
+            <div class="card">
+                <h3>This Year’s Profit</h3>
+                <p>$125,000</p>
+            </div>
+
+            
+            <div class="card">
+                <h3>Cars Sold This Month</h3>
+                <p>25</p>
+            </div>
+
+            
+        </div>
+      </div>
+
+
+      <div id="inventory">
+        <h2>Inventory</h2>
+        <div id="inventory-ribbon">
+          <label>Search
+            <input id="search" type="text" name="inventory-search">
+          </label>
+          <label>Sort
+            <input list="sort-values">
+          </label>
+          <datalist id="sort-values">
+            <option value="New to Older"></option>
+            <option value="Older to new"></option>
+            <option value="High to low Price"></option>
+            <option value="Low to High Price"></option>
+          </datalist>
+          <label for="filter-values">Filter
+            <input list="filter-values">
+          </label>
+          <datalist id="filter-values">
+            <option value="SOld"></option>
+            <option value="Unsold"></option>
+            <option value="All"></option>
+          </datalist>
+        </div>
+        <div id="car-listings">
+
+
+        </div>
+      </div>
+
+      <div id="finance">
+        <h2>Finance</h2>
+        <p>Manage payments, sales, and financial records here.</p>
+      </div>
+
+      <div id="add-new-car">
+        <h2>Add New Car</h2>
+        <form action="#">
+          <label for="car-make">Car Make:</label>
+          <input type="text" id="car-make" name="car-make" required>
+
+          <label for="car-model">Car Model:</label>
+          <input type="text" id="car-model" name="car-model" required>
+
+          <label for="car-year">Car Year:</label>
+          <input type="number" id="car-year" name="car-year" required>
+
+          <label for="car-price">Price:</label>
+          <input type="number" id="car-price" name="car-price" required>
+
+          <label for="car-description">Description:</label>
+          <textarea id="car-description" name="car-description" rows="4" required></textarea>
+
+          <button type="submit">Add Car</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    container = document.getElementById('car-listings')
+    carInventory.cars.forEach(car => { 
+            const card = document.createElement('div');
+            card.className = 'car-card';
+
+            const img = document.createElement('img');
+            img.src = car.image;
+            img.alt = name
+
+            const cardTextArea = document.createElement('div')
+            cardTextArea.className = "card-text-area"
+
+            const cardHeading = document.createElement('h3');
+            cardHeading.textContent = car.make + " " + car.model + " " + car.trim +" " + car.year;
+
+            const carMilage = document.createElement('p');
+            carMilage.innerHTML = "<strong>Milage: </strong>" + car.mileage;
+
+            const carEngineType = document.createElement('p');
+            carEngineType.innerHTML = "<strong>Engine Type: </strong>" + car.engineType
+
+            const btnContainer = document.createElement('div')
+            btnContainer.className = 'card-btn-container'
+
+            const sellBtn = document.createElement('button');
+            sellBtn.textContent = "Sell";
+            sellBtn.className = 'sell-btn'
+            sellBtn.type ="button";
+
+            const detailButton = document.createElement('button');
+            detailButton.textContent = "View Details";
+            detailButton.type ="button";
+
+            btnContainer.append(sellBtn);
+            btnContainer.append(detailButton);
+
+            container.appendChild(card);
+            card.appendChild(img);
+            card.appendChild(cardTextArea);
+            cardTextArea.appendChild(cardHeading);
+            cardTextArea.appendChild(carMilage);
+            cardTextArea.appendChild(carEngineType);
+            card.appendChild(btnContainer);
+             
+        });
+  </script>
+</body>
+</html>
