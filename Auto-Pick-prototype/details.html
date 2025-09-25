@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="details.css">
+    <script src="samplecardata.js"></script>
+    <title>Auto-Pick Home</title>
+</head>
+<body>
+    <div id="home-body">
+        <div id="navbar">
+            <h2 id="name">Auto-Pick</h2>
+            <div id="navbar-links">
+                <a href="home.html">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <div>
+                <p>UserName</p>
+            </div>
+        </div>
+        <div id="heading">
+            <h1 style="text-align: center;">Welcome to Auto-Pick</h1>
+            <p style="text-align: center;">Step to finding a new car</p>
+        </div>
+        <div id="outer-container">
+            
+        </div>
+
+        <div id="footer">
+            <p>Copyright 2025</p>
+        </div>
+    </div>
+
+    <script>
+    container = document.getElementById('outer-container')
+    const car = carInventory.cars[0]
+
+    const carDetails = document.createElement('div');
+    carDetails.className = 'car-detail-container';
+
+    const carDetailHead = document.createElement('div');
+    carDetailHead.className = 'car-detail-header';
+
+    const carHeading = document.createElement('h3');
+    carHeading.textContent = car.make + " " + car.model + " " + car.trim +" " + car.year;
+
+    const img = document.createElement('img');
+    img.src = car.image;
+    img.alt = name
+
+
+    const carTextArea = document.createElement('div')
+    carTextArea.className = "car-details"
+
+    function createCarDetailElement(label, value) {
+        const pElement = document.createElement('p');
+        pElement.innerHTML = `<strong>${label}: </strong>${value}`;
+        carTextArea.append(pElement);
+        return pElement;
+    }
+
+    for(let key in car){
+        if(car.hasOwnProperty(key)){
+            value = car[key];
+            if (!Array.isArray(value) && key != "image" && key != "id" && key != "color" && key != "warranty"){
+            createCarDetailElement(key, value)
+            }
+        }
+    } 
+    carDetailHead.appendChild(img);
+    carDetailHead.appendChild(carHeading);
+    carDetails.appendChild(carDetailHead);
+    carDetails.appendChild(carTextArea);
+    container.appendChild(carDetails);
+      
+  </script>
+</body>
+</html>

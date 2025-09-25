@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Dealership Seller Dashboard</title>
+  <link rel="stylesheet" href="../dashboard.css">
+  <link rel="stylesheet" href="../home.css">
+  <script src="../dashboard.js"></script>
+  <script src="../samplecardata.js"></script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <ul>
+      <li><button onclick="menuBtn('dashboard')" class="menu-btn">Dashboard</button></li>
+      <li><button onclick="menuBtn('browse')" class="menu-btn">Browse</button></li>
+      <li><button onclick="menuBtn('saved')" class="menu-btn">Saved Vehicles</button></li>
+    </ul>
+  </div>
+
+
+  <div class="main-content">
+
+    <div id="content">
+      <div id="dashboard">
+        <div class="header">
+          <h1 style="margin-top: 0px;">Auto-Pick Customer Dashboard</h1>
+        </div>
+        <div class="dashboard-cards">
+            
+            <div class="card">
+                <h3>Auto-Pick purchases</h3>
+                <p>1</p>
+            </div>
+
+            
+        </div>
+      </div>
+
+
+      <div id="Browse">
+        <h2>Browse</h2>
+        <div id="browse-ribbon">
+          <label>Search
+            <input id="search" type="text" name="inventory-search">
+          </label>
+          <label>Sort
+            <input list="sort-values">
+          </label>
+          <datalist id="sort-values">
+            <option value="New to Old"></option>
+            <option value="Old to new"></option>
+            <option value="High to low Price"></option>
+            <option value="Low to High Price"></option>
+          </datalist>
+          <label for="filter-values">Filter
+            <input list="filter-values">
+          </label>
+          <datalist id="filter-values">
+            <option value="On Hold"></option>
+            <option value="Available"></option>
+            <option value="All"></option>
+          </datalist>
+        </div>
+        <div id="car-listings">
+
+
+        </div>
+      </div>
+
+      <div id="saved">
+        <h2>Your Saved Vehicles</h2>
+        <p>View your saved vehciles here</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    container = document.getElementById('car-listings')
+    carInventory.cars.forEach(car => { 
+            const card = document.createElement('div');
+            card.className = 'car-card';
+
+            const img = document.createElement('img');
+            img.src = car.image;
+            img.alt = name
+
+            const cardTextArea = document.createElement('div')
+            cardTextArea.className = "card-text-area"
+
+            const cardHeading = document.createElement('h3');
+            cardHeading.textContent = car.make + " " + car.model + " " + car.trim +" " + car.year;
+
+            const carMilage = document.createElement('p');
+            carMilage.innerHTML = "<strong>Milage: </strong>" + car.mileage;
+
+            const carEngineType = document.createElement('p');
+            carEngineType.innerHTML = "<strong>Engine Type: </strong>" + car.engineType
+
+            const btnContainer = document.createElement('div')
+            btnContainer.className = 'card-btn-container'
+
+            const viewBtn = document.createElement('button');
+            viewBtn.textContent = "View Seller";
+            viewBtn.className = 'Contact-btn'
+            viewBtn.type ="button";
+
+            const detailButton = document.createElement('button');
+            detailButton.textContent = "View Details";
+            detailButton.type ="button";
+
+            const saveButton = document.createElement('button');
+            saveButton.textContent = "Save Vehicle";
+            saveButton.type ="button";
+
+          
+
+            btnContainer.append(viewBtn);
+            btnContainer.append(detailButton);
+            btnContainer.append(saveButton);
+            
+
+            container.appendChild(card);
+            card.appendChild(img);
+            card.appendChild(cardTextArea);
+            cardTextArea.appendChild(cardHeading);
+            cardTextArea.appendChild(carMilage);
+            cardTextArea.appendChild(carEngineType);
+            card.appendChild(btnContainer);
+             
+        });
+  </script>
+</body>
+</html>
