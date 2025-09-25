@@ -18,8 +18,8 @@ A platform designed to guide Customers through a seamless transition into a new 
     i. Create/modify customer profile - Register as a customer.
     ii. Search and filter through available vehicles - while being able to save liked  vehicles for later.
     iii. Rate and review sellers.
-    iv. Access to purchase information
-    v. Print/upload paperwork - when applicable
+    iv. Access to purchase information.
+    v. Print/upload paperwork - when applicable.
 
 
 2. Provider:
