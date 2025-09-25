@@ -17,11 +17,10 @@ A platform designed to guide Customers through a seamless transition into a new 
 1. Customer:
     i. Create/modify customer profile - Register as a customer.
     ii. Search and filter through available vehicles - while being able to save liked  vehicles for later.
-    iii. Message/Contact Sellers -  through an integrated messaging system.
-    iv. Access to financing information - an estimated monthly payment. 
-    v. Payment
-    vi. Print/upload paperwork - when applicable (Maybe e-sign)
-    vii. Rate and review sellers
+    iii. Rate and review sellers.
+    iv. Access to purchase information
+    v. Print/upload paperwork - when applicable
+
 
 2. Provider:
     i.   Create/modify/remove provider profile - Register as a Dealship Owner.
