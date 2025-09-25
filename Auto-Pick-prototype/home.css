@@ -56,18 +56,22 @@ button:hover {
     text-decoration: none;
     list-style: none;
     color: #f4f4f4;
+    border-bottom: #14243f;
 }
-
+#navbar-links a:hover{
+    border-bottom: #fff;
+}
 #heading{
     display: flex;
     flex-direction: column;
     gap: 10px;
     background-image: url("header_background.jpg");
     background-position: center;
-    height: 35vh;
+    height: auto;
     max-height: 250px;
     color: #f4f4f4;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px 0;
 }
 #search{
     display: flex;
@@ -91,6 +95,7 @@ button:hover {
     height: 5vh;
     max-height: 55px;
     text-align: center;
+    color: #fff;
 }
 
 
