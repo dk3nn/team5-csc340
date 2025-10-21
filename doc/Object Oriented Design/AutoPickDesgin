@@ -36,14 +36,19 @@ Sellers list their vehicles, customers search and save any vehicel they are inte
 
 #### 2.2.1 Actor: Seller
 ##### 2.2.1.1 Sign Up
+A seller can sign up to create their profile with their name, email, phone number, password, address and secret code provided by the developer. Emails must be unique.
 
 ##### 2.2.1.2 Log In
+A seller shall be able to sign in using their registred email and password. After logging in, the seller shall be directed to the seller's dashboard.
 
 ##### 2.2.1.3 Update Profile
+A seller shall be able to change their profile information using their profile page.
 
 ##### 2.2.1.4 Add a vehicle
+A seller shall be able to add a new vehicle to their inventory and also view their inventory and make changes(edit or delete vehicles) to it. The seller should also be able to add vehicles to sold inventory and assign it with the buyer.
 
 ##### 2.2.1.4 View Stats
+A seller shouold be able to look at their profit and due payments, profits, number of vehicles in inventory and sold vehicles.
 
 
 
