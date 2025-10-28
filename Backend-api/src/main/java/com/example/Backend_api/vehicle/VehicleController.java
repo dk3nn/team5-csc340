@@ -1,5 +1,6 @@
 package com.example.Backend_api.vehicle;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +12,13 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.saveVehicle(vehicle);
+    public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) {
+        return ResponseEntity.ok(vehicleService.saveVehicle(vehicle));
     }
 
     @PutMapping("/{id}")
-    public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
-        return vehicleService.updatVehicle(id, vehicle);
+    public ResponseEntity<Vehicle> updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+        return ResponseEntity.ok(vehicleService.updatVehicle(id, vehicle));
     }
 
     @DeleteMapping("/{id}")
@@ -26,18 +27,18 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    public Vehicle getVehicleById(@PathVariable Long id) {
-        return vehicleService.getVehicleById(id);
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
+        return ResponseEntity.ok(vehicleService.getVehicleById(id));
     }
 
     @GetMapping
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAllVehicles();
+    public ResponseEntity<List<Vehicle>> getAllVehicles() {
+        return ResponseEntity.ok(vehicleService.getAllVehicles());
     }
 
 
     @GetMapping("/dealer/{dealerId}")
-    public List<Vehicle> getVehiclesByDealerId(@PathVariable Long dealerId) {
-        return vehicleService.getVehiclesByDealerId(dealerId);
+    public ResponseEntity<List<Vehicle>> getVehiclesByDealerId(@PathVariable Long dealerId) {
+        return ResponseEntity.ok(vehicleService.getVehiclesByDealerId(dealerId));
     }
 }

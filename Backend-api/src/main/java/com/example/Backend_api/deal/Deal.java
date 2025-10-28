@@ -48,10 +48,10 @@ public class Deal {
     @JsonIgnoreProperties({"deal", "dealer"})
     private Vehicle vehicle;
 
-    // @OneToOne
-    // @JoinColumn(name = "customer_id", nullable = false)
-    // @JsonIgnoreProperties("deals")
-    // private Customer customer;
+    @OneToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnoreProperties("deals")
+    private Customer customer;
 
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)

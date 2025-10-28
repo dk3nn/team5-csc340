@@ -65,7 +65,8 @@ public class DealController {
         existingDeal.setDealDate(deal.getDealDate());
         existingDeal.setDealAmount(deal.getDealAmount()); 
         existingDeal.setVehicle(deal.getVehicle());
-        return deal;
+        dealService.saveDeal(existingDeal);
+        return existingDeal;
     }
 
 }
