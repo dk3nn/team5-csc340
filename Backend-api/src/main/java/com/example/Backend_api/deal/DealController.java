@@ -1,12 +1,9 @@
 package com.example.Backend_api.deal;
 
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.Backend_api.payment.Payment;
 import com.example.Backend_api.payment.PaymentRepository;
-
 import lombok.RequiredArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
@@ -67,6 +64,12 @@ public class DealController {
         existingDeal.setVehicle(deal.getVehicle());
         dealService.saveDeal(existingDeal);
         return existingDeal;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteDeal(@PathVariable Long id) {
+        Deal existingDeal = dealService.getDealById(id);
+        dealService.deleteDeal(existingDeal);
     }
 
 }
