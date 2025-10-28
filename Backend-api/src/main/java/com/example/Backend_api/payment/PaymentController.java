@@ -47,6 +47,9 @@ public class PaymentController {
         return paymentService.updatePayment(id, payment);
     }
 
-
+    @GetMapping("dealer/{dealerId}")
+    public List<Payment> getPaymentsByDealerId(@PathVariable Long dealerId) {
+        return paymentService.getPaymentsByDealerId(dealerId);
+    }
 
 }

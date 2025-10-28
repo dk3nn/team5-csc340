@@ -45,7 +45,7 @@ public class Deal {
 
     @OneToOne
     @JoinColumn(name = "vehicle_id", nullable = false)  
-    @JsonIgnoreProperties("deals")
+    @JsonIgnoreProperties({"deal", "dealer"})
     private Vehicle vehicle;
 
     // @OneToOne

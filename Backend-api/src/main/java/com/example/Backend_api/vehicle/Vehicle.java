@@ -74,8 +74,8 @@ public class Vehicle {
     private Deal deal;
 
     @ManyToOne
-    @JsonIgnoreProperties("vehicle") 
     @JoinColumn(name = "dealer_id", nullable = false)  
+    @JsonIgnoreProperties("vehicles") 
     private Dealer dealer;
 
     public Vehicle(Long id) {

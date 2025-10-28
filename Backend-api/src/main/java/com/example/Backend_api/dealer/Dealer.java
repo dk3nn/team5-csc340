@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.example.Backend_api.vehicle.Vehicle;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class Dealer {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 

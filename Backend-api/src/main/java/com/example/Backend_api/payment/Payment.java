@@ -1,5 +1,7 @@
 package com.example.Backend_api.payment;
 
+import java.time.LocalDate;
+
 import com.example.Backend_api.deal.Deal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,14 +29,17 @@ public class Payment {
     private Double amount;
 
     @Column(nullable = false)
+    private LocalDate dueDate;
+
+    @Column(nullable = false)
     private String method;
 
     @Column(nullable = false)
     private Boolean paid = false;
 
     @ManyToOne
-    @JsonIgnoreProperties("payment")
     @JoinColumn(name = "deal_id", nullable = false)
+    @JsonIgnoreProperties({"payments", "vehicle"})
     private Deal deal;
 
     public Payment(Long id) {

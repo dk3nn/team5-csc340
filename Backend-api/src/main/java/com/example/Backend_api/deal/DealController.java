@@ -1,7 +1,13 @@
 package com.example.Backend_api.deal;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.Backend_api.payment.Payment;
+import com.example.Backend_api.payment.PaymentRepository;
+
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class DealController {
 
     private final DealService dealService;
+    private final PaymentRepository PaymentRepository;
 
     @GetMapping("")
     public List<Deal> getDeals() {
@@ -19,7 +26,27 @@ public class DealController {
 
     @PostMapping("")
     public Deal createDeal(@RequestBody Deal deal) {
-        return dealService.saveDeal(deal);
+        Deal newDeal = dealService.saveDeal(deal);
+        LocalDate currentDate = LocalDate.now();
+        if (newDeal.getIsFinanced()){
+            Double paymentAmount = newDeal.getDealAmount() / 12; 
+            for (int i = 0; i < 12; i++) {
+                Payment newPayment = new Payment();
+                newPayment.setDeal(newDeal);
+                newPayment.setAmount(paymentAmount);
+                newPayment.setMethod("cash");
+                newPayment.setDueDate(currentDate.plusMonths(i+1));
+                PaymentRepository.save(newPayment);
+            }
+        }else{
+            Payment newPayment = new Payment();
+            newPayment.setDeal(newDeal);
+            newPayment.setAmount(newDeal.getDealAmount());
+            newPayment.setMethod("cash");
+            newPayment.setDueDate(currentDate.plusMonths(1));
+            PaymentRepository.save(newPayment);
+        }
+        return newDeal;
     }
 
     @GetMapping("/vehicle/{vehicleId}")
