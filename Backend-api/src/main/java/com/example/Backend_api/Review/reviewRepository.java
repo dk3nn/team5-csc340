@@ -13,6 +13,5 @@ import java.util.List;
 public interface reviewRepository extends JpaRepository<review, Long> {
     List<review> findByCustomer(customer cust);
     List<review> findByDealer(Dealer dealer);
-    List<review> findByVehicle(Vehicle vehicle);
 }
 
