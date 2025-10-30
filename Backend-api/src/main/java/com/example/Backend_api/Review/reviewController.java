@@ -1,14 +1,13 @@
 package com.example.Backend_api.Review;
 
 import com.example.Backend_api.Customer.customerService;
-import com.example.Backend_api.dealer.dealerService;
-import com.example.Backend_api.vehicle.vehicleService;
+import com.example.Backend_api.dealer.DealerService;
+//import com.example.Backend_api.vehicle.VehicleService;
 
 import lombok.RequiredArgsConstructor;
-import software.amazon.awssdk.annotations.ReviewBeforeRelease;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +22,8 @@ public class reviewController {
 
     private final reviewService reviewService;
     private final customerService customerService;
-    private final dealerService dealerService;
-    private final vehicleService vehicleService;
+    private final DealerService DealerService;
+   // private final VehicleService VehicleService;
 
     @PostMapping
     public ResponseEntity<review> createReview(@Validated@RequestBody review review) {
