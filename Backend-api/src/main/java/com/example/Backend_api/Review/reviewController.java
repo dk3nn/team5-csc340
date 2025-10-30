@@ -26,10 +26,6 @@ public class reviewController {
         return ResponseEntity.ok(reviewService.createReview(review));
     }
 
-    @PostMapping("/{rId}/response")
-    public ResponseEntity<review> addResponse(@PathVariable Long rId, @RequestBody String response){
-        return ResponseEntity.ok(reviewService.addResponse(rId, response));
-    }
 
     @DeleteMapping("/{rId}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long rId){
