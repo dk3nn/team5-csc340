@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
-
-import org.antlr.v4.runtime.misc.NotNull;
-
 import com.example.Backend_api.Customer.customer;
 import com.example.Backend_api.dealer.Dealer;
 

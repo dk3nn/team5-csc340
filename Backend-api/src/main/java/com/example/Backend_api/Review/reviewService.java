@@ -2,16 +2,13 @@ package com.example.Backend_api.Review;
 
 import com.example.Backend_api.Customer.customer;
 import com.example.Backend_api.dealer.Dealer;
-import com.example.Backend_api.vehicle.Vehicle;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.OptionalDouble;
 
 @Service
 @lombok.RequiredArgsConstructor
@@ -20,10 +17,16 @@ public class reviewService{
    
     private final com.example.Backend_api.Review.reviewRepository reviewRepository;
 
-    public double getAverageRatingForDealer(Dealer dealer){
+    public Double getAverageRatingForDealer(Dealer dealer) {
         List<review> reviews = reviewRepository.findByDealer(dealer);
-        OptionalDouble avg = reviews.stream().mapToDouble(review -> review.getOverallRating() != null ? review.getOverallRating() : 0.0)
-        return avg.orElse(0.0);
+        if (reviews.isEmpty()) {
+            return 0.0;
+        }
+        Double sum = 0.0;
+        for (review rev : reviews) {
+            sum += rev.getRating();
+        }
+        return sum / reviews.size();
     }
 
     public review createReview(review rev){
