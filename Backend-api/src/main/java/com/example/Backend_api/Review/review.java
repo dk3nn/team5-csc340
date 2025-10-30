@@ -24,7 +24,7 @@ public class review {
 
     
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_cId", nullable = false)
     @JsonIgnoreProperties("reviews")
     private customer customer;
 
@@ -34,7 +34,7 @@ public class review {
     @JsonIgnoreProperties("reviews")
     private Dealer dealer;
 
-    @NotNull
+    
     private Double rating;
 
     @Column(columnDefinition="TEXT")

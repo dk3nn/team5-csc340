@@ -2,7 +2,7 @@ package com.example.Backend_api.Review;
 
 import com.example.Backend_api.Customer.customer;
 import com.example.Backend_api.dealer.Dealer;
-//import com.example.Backend_api.vehicle.Vehicle;
+import com.example.Backend_api.vehicle.Vehicle;
 
 import jakarta.persistence.EntityNotFoundException;
 //import lombok.RequiredArgsConstructor;
