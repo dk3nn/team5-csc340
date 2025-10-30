@@ -50,7 +50,7 @@ public class Deal {
     private Vehicle vehicle;
 
     @OneToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_cId", nullable = false)
     @JsonIgnoreProperties("deal")
     private customer customer;
 

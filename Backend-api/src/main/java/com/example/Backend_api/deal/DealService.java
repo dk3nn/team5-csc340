@@ -29,5 +29,9 @@ public class DealService {
     public Deal getDealById(Long id) {
         return dealRipository.findById(id).orElseThrow(() -> new RuntimeException("Deal not found"));
     }
+
+    public void deleteDeal(Long id) {
+        dealRipository.deleteById(id);
+    }
     
 }

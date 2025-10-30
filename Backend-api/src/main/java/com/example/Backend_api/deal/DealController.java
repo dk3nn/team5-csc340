@@ -19,17 +19,17 @@ public class DealController {
     private final DealService dealService;
     private final PaymentRepository PaymentRepository;
 
-    @GetMapping("")
+    @GetMapping
     public List<Deal> getDeals() {
         return dealService.getAllDeals();
     }
 
-    @PostMapping("")
+    @PostMapping
     public Deal createDeal(@RequestBody Deal deal) {
         Deal newDeal = dealService.saveDeal(deal);
         LocalDate currentDate = LocalDate.now();
         if (newDeal.getIsFinanced()){
-            Double paymentAmount = newDeal.getDealAmount() / 12; 
+            Double paymentAmount = newDeal.getDealAmount() - newDeal.getDownPayment() / 12; 
             for (int i = 0; i < 12; i++) {
                 Payment newPayment = new Payment();
                 newPayment.setDeal(newDeal);
@@ -67,6 +67,11 @@ public class DealController {
         existingDeal.setVehicle(deal.getVehicle());
         dealService.saveDeal(existingDeal);
         return existingDeal;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteDeal(@PathVariable Long id) {
+        dealService.deleteDeal(id);
     }
 
 }
