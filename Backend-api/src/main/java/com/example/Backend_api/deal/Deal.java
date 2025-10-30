@@ -1,5 +1,4 @@
 package com.example.Backend_api.deal;
-
 import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.Customer.customer;
 
@@ -52,14 +51,12 @@ public class Deal {
 
     @OneToOne
     @JoinColumn(name = "customer_cId", nullable = false)
-    @JsonIgnoreProperties("deals")
+    @JsonIgnoreProperties("deal")
     private customer customer;
 
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("deal")
     private List<Payment> payments;
-
-
 
 }
