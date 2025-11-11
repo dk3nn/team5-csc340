@@ -2,6 +2,8 @@ package com.example.Backend_api.Customer;
 
 import java.util.List;
 
+import org.hibernate.annotations.ManyToAny;
+
 import com.example.Backend_api.deal.Deal;
 import com.example.Backend_api.Review.review;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -152,9 +155,9 @@ public class customer {
         this.password = password;
     }
 
-    @OneToOne(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("customer")
-    private Deal deal; 
+    private List<Deal> deal; 
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("customer")

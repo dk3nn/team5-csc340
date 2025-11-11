@@ -34,16 +34,15 @@ public class Dealer {
     private String email;
 
     @NotBlank
-    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "dealer", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("dealer")
+    @JsonIgnoreProperties({"dealer", "review", "deal"})
     private List<Vehicle> vehicles = new ArrayList<>();
 
     @OneToMany(mappedBy = "dealer", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("dealer")
+    @JsonIgnoreProperties({"dealer", "vehicle", "customer"})
     private List<review> dealerReviews = new ArrayList<>();
 
     @NotBlank

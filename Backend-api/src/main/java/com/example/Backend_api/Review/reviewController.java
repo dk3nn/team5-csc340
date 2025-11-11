@@ -49,7 +49,6 @@ public class reviewController {
         Map<String, Double> ratings = new HashMap<>();
         ratings.put("averageRating", avgRating);
         return ResponseEntity.ok(ratings);
-
     }
 
     
