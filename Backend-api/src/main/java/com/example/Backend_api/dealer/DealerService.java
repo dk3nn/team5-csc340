@@ -45,4 +45,13 @@ public class DealerService {
         return dealerRipository.findAll();
     }
 
+    public Dealer authenticate(String email, String password){
+        Dealer dealer = dealerRipository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Dealer with email " + email + " not found."));
+        if(!dealer.getPassword().equals(password)){
+            throw new IllegalArgumentException("Invalid password for dealer with email " + email + ".");
+        }
+        return dealer;
+    }
+
 }

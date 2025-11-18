@@ -11,160 +11,273 @@
 </head>
 <body>
 
-  <div class="sidebar">
-    <ul>
-      <li><button onclick="menuBtn('dashboard')" class="menu-btn">Dashboard</button></li>
-      <li><button onclick="menuBtn('inventory')" class="menu-btn">Inventory</button></li>
-      <li><button onclick="menuBtn('finance')" class="menu-btn">Finance</button></li>
-      <li><button onclick="menuBtn('add-new-car')" class="menu-btn">Add New Car</button></li>
-    </ul>
-  </div>
-
-  <div class="main-content">
-
-    <div id="content">
-      <div id="dashboard">
-        <div class="header">
-          <h1 style="margin-top: 0px;">Auto-Pick Seller Dashboard</h1>
+    <div id="home-body" style="overflow: hidden;">
+        <div id="navbar">
+            <h2 id="name">Auto-Pick</h2>
+            <div id="navbar-links">
+                <a href="index.html">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <div id="btn-container">
+                <button type="button" id="signup-btn">Sign Up</button>
+                <button type="button" id="login-btn">LogIn</button>
+            </div>
         </div>
-        <div class="dashboard-cards">
-            
-            <div class="card">
-                <h3>Total Cars Sold</h3>
-                <p>150</p>
-            </div>
-
-            
-            <div class="card">
-                <h3>Cars in the Shop</h3>
-                <p>35</p>
-            </div>
-
-            
-            <div class="card">
-                <h3>Total Profit</h3>
-                <p>$500,000</p>
-            </div>
-            
-            <div class="card">
-                <h3>This Year’s Profit</h3>
-                <p>$125,000</p>
-            </div>
-
-            
-            <div class="card">
-                <h3>Cars Sold This Month</h3>
-                <p>25</p>
-            </div>      
-        </div>
-      </div>
-
-      <div id="inventory">
-        <h2>Inventory</h2>
-        <div id="inventory-ribbon">
-          <label>Search
-            <input id="search" type="text" name="inventory-search">
-          </label>
-          <label>Sort
-            <input list="sort-values">
-          </label>
-          <datalist id="sort-values">
-            <option value="New to Older"></option>
-            <option value="Older to new"></option>
-            <option value="High to low Price"></option>
-            <option value="Low to High Price"></option>
-          </datalist>
-          <label for="filter-values">Filter
-            <input list="filter-values">
-          </label>
-          <datalist id="filter-values">
-            <option value="SOld"></option>
-            <option value="Unsold"></option>
-            <option value="All"></option>
-          </datalist>
+        <div id="heading">
+            <h1 style="text-align: center;">Welcome to Auto-Pick</h1>
+            <p style="text-align: center;">Step to finding a new car</p>
         </div>
 
-        
-        <div id="car-listings">
-
-        </div>
-      </div>
-
-      <div id="finance">
-        <h2>Finance</h2>
-        <h3 style="text-align: center;">Due Payments List</h3>
-        <table id="payment-table">
-          <thead>
-            <td>User name</td>
-            <td>Payment amount</td>
-            <td>Due Date</td>
-            <td>Vehicle sold</td>
-            <td>User Contact</td>
-          </thead>
-          <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>9/26/25</td>
-            <td>Honda</td>
-            <td>555-555-5555</td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>9/26/25</td>
-            <td>Honda</td>
-            <td>555-555-5555</td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>9/26/25</td>
-            <td>Honda</td>
-            <td>555-555-5555</td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>9/26/25</td>
-            <td>Honda</td>
-            <td>555-555-5555</td>
-          </tr>
-          </thead>
-        </table>
-      </div>
-
-      <div id="add-new-car">
-        <h2>Add New Car</h2>
-        <form action="#">
-          <label for="car-make">Car Make:</label>
-          <input type="text" id="car-make" name="car-make" required>
-
-          <label for="car-model">Car Model:</label>
-          <input type="text" id="car-model" name="car-model" required>
-
-          <label for="car-year">Car Year:</label>
-          <input type="number" id="car-year" name="car-year" required>
-
-          <label for="car-price">Price:</label>
-          <input type="number" id="car-price" name="car-price" required>
-
-          <label for="car-description">Description:</label>
-          <textarea id="car-description" name="car-description" rows="4" required></textarea>
-
-          <button type="submit">Add Car</button>
-        </form>
-      </div>
+    <div id="dashboard-body">
+    <div class="sidebar">
+        <ul>
+        <li><button onclick="menuBtn('dashboard')" class="menu-btn">Dashboard</button></li>
+        <li><button onclick="menuBtn('inventory')" class="menu-btn">Inventory</button></li>
+        <li><button onclick="menuBtn('finance')" class="menu-btn">Finance</button></li>
+        <li><button onclick="menuBtn('add-new-car')" class="menu-btn">Add New Car</button></li>
+        </ul>
     </div>
-  </div>
+
+    <div class="main-content">
+
+        <div id="dashboard">
+            <div class="header">
+            <h1 style="margin-top: 0px;">Auto-Pick Seller Dashboard</h1>
+            </div>
+            <div class="dashboard-cards">
+                
+                <div class="card">
+                    <h3>Total Cars Sold</h3>
+                    <p>150</p>
+                </div>
+
+                
+                <div class="card">
+                    <h3>Cars in the Shop</h3>
+                    <p>35</p>
+                </div>
+
+                
+                <div class="card">
+                    <h3>Total Profit</h3>
+                    <p>$500,000</p>
+                </div>
+                
+                <div class="card">
+                    <h3>This Year’s Profit</h3>
+                    <p>$125,000</p>
+                </div>
+
+                
+                <div class="card">
+                    <h3>Cars Sold This Month</h3>
+                    <p>25</p>
+                </div>      
+            </div>
+        </div>
+
+        <div id="inventory">
+            <h2>Inventory</h2>
+            <div id="inventory-ribbon">
+            <label>Search
+                <input id="search" type="text" name="inventory-search">
+            </label>
+            <label>Sort
+                <input list="sort-values">
+            </label>
+            <datalist id="sort-values">
+                <option value="New to Older"></option>
+                <option value="Older to new"></option>
+                <option value="High to low Price"></option>
+                <option value="Low to High Price"></option>
+            </datalist>
+            <label for="filter-values">Filter
+                <input list="filter-values">
+            </label>
+            <datalist id="filter-values">
+                <option value="SOld"></option>
+                <option value="Unsold"></option>
+                <option value="All"></option>
+            </datalist>
+            </div>
+
+            
+            <div id="dashboard-car-listings">
+
+            </div>
+        </div>
+
+        <div id="finance">
+            <h2>Finance</h2>
+            <h3 style="text-align: center;">Due Payments List</h3>
+            <table id="payment-table">
+            <thead>
+                <td>User name</td>
+                <td>Payment amount</td>
+                <td>Due Date</td>
+                <td>Vehicle sold</td>
+                <td>User Contact</td>
+            </thead>
+            
+            
+            </table>
+        </div>
+
+        <div id="add-new-car">
+            <form id="add-vehicle-form">
+            <h1 id="form-heading" style="text-align: center;">Add New Vehicle</h1>
+
+            <fieldset>
+                <legend>VIN Lookup</legend>
+                <div class="form-group">
+                    <label for="vin-input">VIN</label>
+                    <div class="vin-input-group">
+                        <input type="text" id="vin-input" name="vin" required maxlength="17" minlength="17">
+                        <button type="button" id="vin-fetch-btn" class="btn btn-secondary">Fetch Info</button>
+                    </div>
+                </div>
+            </fieldset>
+
+            <input type="hidden" id="vehicle-id" name="id">
+            <input type="hidden" id="dealer-id" name="dealerId">
+
+            <fieldset>
+                <legend>Core Details</legend>
+                <div class="form-group">
+                    <label for="make">Make</label>
+                    <input type="text" id="make" name="make" required>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model</label>
+                    <input type="text" id="model" name="model" required>
+                </div>
+                <div class="form-group">
+                    <label for="trim">Trim</label>
+                    <input type="text" id="trim" name="trim" required>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <input type="number" id="year" name="year" required min="1900" max="2099">
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" id="color" name="color" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price ($)</label>
+                    <input type="number" id="price" name="price" required min="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="cost">Cost ($)</label>
+                    <input type="number" id="cost" name="cost" required min="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="mileage">Mileage</label>
+                    <input type="number" id="mileage" name="mileage" required min="0">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Specifications</legend>
+                <div class="form-group">
+                    <label for="transmission">Transmission</label>
+                    <input list="transmission-options" id="transmission" name="transmission" required>
+                    <datalist id="transmission-options">
+                        <option value="Automatic"></option>
+                        <option value="Manual"></option>
+                        <option value="CVT"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="fuelType">Fuel Type</label>
+                    <input list="fuelType-options" id="fuelType" name="fuelType" required>
+                    <datalist id="fuelType-options">
+                        <option value="Gasoline"></option>
+                        <option value="Diesel"></option>
+                        <option value="Electric"></option>
+                        <option value="Hybrid"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="bodyType">Body Type</label>
+                    <input list="bodyType-options" id="bodyType" name="bodyType" required>
+                    <datalist id="bodyType-options">
+                        <option value="Sedan"></option>
+                        <option value="SUV"></option>
+                        <option value="Truck"></option>
+                        <option value="Coupe"></option>
+                        <option value="Hatchback"></option>
+                        <option value="Van/Minivan"></option>
+                        <option value="Wagon"></option>
+                        <option value="Convertible"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="numberOfDoors">Doors</label>
+                    <input list="numberOfDoors-options" id="numberOfDoors" name="numberOfDoors" required>
+                    <datalist id="numberOfDoors-options">
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="driveType">Drive Type</label>
+                    <input list="driveType-options" id="driveType" name="driveType" required>
+                    <datalist id="driveType-options">
+                        <option value="FWD">Front-Wheel Drive (FWD)</option>
+                        <option value="RWD">Rear-Wheel Drive (RWD)</option>
+                        <option value="AWD">All-Wheel Drive (AWD)</option>
+                        <option value="4WD">4-Wheel Drive (4WD)</option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="engineSize">Engine Size</label>
+                    <input type="text" id="engineSize" name="engineSize" placeholder="e.g., 2.0L I4 or V8" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Media & Status</legend>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Add extra details..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="imageUrl">Image URL</label>
+                    <input type="url" id="imageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
+                </div>
+            </fieldset>
+            
+            <button type="submit" id="save-form-btn" class="btn btn-primary">Add Vehicle</button>
+        </form>
+        </div>
+    </div>
+    </div>
+    <div id="footer">
+            <p>Copyright 2025</p>
+        </div>
+</div>
 
   <script>
-    container = document.getElementById('car-listings')
-    carInventory.cars.forEach(car => { 
+    //global variables
+    const editForm = document.createElement('add-vehicle-form');
+    const urlParams = new URLSearchParams(window.location.search);
+    const dealerId = urlParams.get('dealerId');
+
+    // Car listings in the inventory section
+    container = document.getElementById('dashboard-car-listings')
+    fetch("http://127.0.0.1:8080/api/vehicles/dealer/" + dealerId)
+        .then(response => response.json())
+        .then(carInventory => { 
+            carInventory.forEach(car => { 
             const card = document.createElement('div');
             card.className = 'car-card';
 
             const img = document.createElement('img');
-            img.src = car.image;
+            img.src = car.imageUrl;
             img.alt = name
 
             const cardTextArea = document.createElement('div')
@@ -177,7 +290,7 @@
             carMilage.innerHTML = "<strong>Milage: </strong>" + car.mileage;
 
             const carEngineType = document.createElement('p');
-            carEngineType.innerHTML = "<strong>Engine Type: </strong>" + car.engineType
+            carEngineType.innerHTML = "<strong>Engine: </strong>" + car.engineSize
 
             const btnContainer = document.createElement('div')
             btnContainer.className = 'card-btn-container'
@@ -191,8 +304,79 @@
             detailButton.textContent = "View Details";
             detailButton.type ="button";
 
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = "Delete";
+            deleteButton.type ="button";
+
+            const editButton = document.createElement('button');
+            editButton.textContent = "Edit";
+            editButton.value = car.id;
+            editButton.type ="button";
+
+
+            //button functionality
+            deleteButton.addEventListener('click', async () => {
+                try {
+                    const response = await fetch(`http://127.0.0.1:8080/api/vehicles/${car.id}`, {
+                        method: 'DELETE',
+                    });
+                    if (response.ok) {
+                        alert('Vehicle deleted successfully!');
+                        card.remove();
+                    } else {
+                        alert('Failed to delete vehicle.');
+                    }
+                } catch (error) {
+                    console.error('Error deleting vehicle:', error);
+                    alert('Failed to delete vehicle. Please try again later.');
+                }
+            });
+
+            detailButton.addEventListener('click', () => {
+                window.location.href = `vehicle-details.html?vehicleId=${car.id}`;
+            });
+
+            //editting button functionality
+            const inventoryDiv = document.getElementById('inventory');
+            editButton.addEventListener('click', (event) => {
+                const carId = event.target.value;
+                inventoryDiv.style.display = 'none';
+                saveFormBtn = document.getElementById('save-form-btn');
+                saveFormBtn.textContent = "Save Changes";
+                formHeading = document.getElementById('form-heading');
+                formHeading.textContent = "Edit Vehicle Details";
+                addNewCarDiv = document.getElementById('add-new-car');
+                addNewCarDiv.style.display = 'block';
+                fetch(`http://127.0.0.1:8080/api/vehicles/${carId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('make').value = data.make || '';
+                    document.getElementById('model').value = data.model || '';
+                    document.getElementById('year').value = data.year || '';
+                    document.getElementById('trim').value = data.trim || '';
+                    document.getElementById('bodyType').value = data.bodyType || '';
+                    document.getElementById('engineSize').value = data.engineSize || '';
+                    document.getElementById('fuelType').value = data.fuelType || '';
+                    document.getElementById('transmission').value = data.transmission || '';
+                    document.getElementById('bodyType').value = data.bodyType || '';
+                    document.getElementById('numberOfDoors').value = data.numberOfDoors || '';
+                    document.getElementById('driveType').value = data.driveType || '';
+                    document.getElementById('description').value = data.description || '';
+                    document.getElementById('imageUrl').value = data.imageUrl || '';
+                    document.getElementById('color').value = data.color || '';
+                    document.getElementById('price').value = data.price || '';
+                    document.getElementById('cost').value = data.cost || '';
+                    document.getElementById('mileage').value = data.mileage || '';
+                    document.getElementById('vin-input').value = data.vin || '';
+                    document.getElementById('vehicle-id').value = data.id || '';
+                    document.getElementById('dealer-id').value = data.dealer.id || '';
+                });
+            });
+
             btnContainer.append(sellBtn);
             btnContainer.append(detailButton);
+            btnContainer.append(editButton);
+            btnContainer.append(deleteButton);
 
             container.appendChild(card);
             card.appendChild(img);
@@ -202,6 +386,118 @@
             cardTextArea.appendChild(carEngineType);
             card.appendChild(btnContainer);     
         });
+    });
+
+
+    // VIN Lookup Functionality
+    const vinFetchBtn = document.getElementById('vin-fetch-btn');
+    vinFetchBtn.addEventListener('click', async () => {
+        const vin = document.getElementById('vin-input').value.trim();
+        if (vin.length !== 17) {
+            alert('Please enter a valid 17-character VIN.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/${vin}?format=json`);
+            const data = await response.json();
+            const result = data.Results[0];
+            console.log(result);
+
+            document.getElementById('make').value = result.Make || '';
+            document.getElementById('model').value = result.Model || '';
+            document.getElementById('year').value = result.ModelYear || '';
+            document.getElementById('trim').value = result.Trim || '';
+            document.getElementById('bodyType').value = result.BodyClass || '';
+            document.getElementById('engineSize').value = `${result.DisplacementL}L` || '';
+            document.getElementById('fuelType').value = result.FuelTypePrimary || '';
+            document.getElementById('transmission').value = result.TransmissionStyle || '';
+            document.getElementById('bodyType').value = result.BodyClass || '';
+            document.getElementById('numberOfDoors').value = result.Doors || '';
+            document.getElementById('driveType').value = result.DriveType || '';
+            document.getElementById('description').value = result.Note || '';
+
+        } catch (error) {
+            console.error('Error fetching VIN data:', error);
+            alert('Failed to fetch vehicle data. Please try again later.');
+        }
+    });
+
+    //edit vehicle form submission handling
+    async function formSubmitionHandler(url, method, formData, message) {
+        try {
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                alert(`Vehicle ${message} successfully!`);
+                window.location.reload();
+            } else {
+                const errorData = await response.json();
+                alert('Failed to' + message + ' vehicle: ' + (errorData.message || 'Unknown error'));
+            }
+        } catch (error) {
+            console.error('Error' + message +' vehicle data:', error);   
+            alert('Failed to ' + message +' vehicle data. Please try again later.');
+        }
+    };
+
+
+    //New Vehicle Form Submission Handling
+    const addVehicleForm = document.getElementById('add-vehicle-form');
+    addVehicleForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(addVehicleForm);
+        const vehicleData = Object.fromEntries(formData.entries());
+        if(document.getElementById('save-form-btn').textContent === "Save Changes"){
+            vehicleData.dealer = {id : dealerId};
+            formSubmitionHandler(`http://127.0.0.1:8080/api/vehicles/${vehicleData.id}`, 'PUT', vehicleData, 'edit');
+        }else{
+            vehicleData.dealer = {id : dealerId};
+            delete vehicleData.id;
+           formSubmitionHandler(`http://127.0.0.1:8080/api/vehicles`, 'POST', vehicleData, 'add');
+        }
+    }); 
+
+
+
+
+    // payments handling
+    const paymentTable = document.getElementById('payment-table');
+    fetch("http://127.0.0.1:8080/api/payment")
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(payment => {
+            const row = document.createElement('tr');
+
+            const userNameCell = document.createElement('td');
+            userNameCell.textContent = payment.deal.customer.name;
+            row.appendChild(userNameCell);
+
+            const amountCell = document.createElement('td');
+            amountCell.textContent = `$${payment.amount.toFixed(2)}`;
+            row.appendChild(amountCell);
+
+            const dueDateCell = document.createElement('td');
+            dueDateCell.textContent = new Date(payment.dueDate).toLocaleDateString();
+            row.appendChild(dueDateCell);
+
+            const vehicleCell = document.createElement('td');
+            vehicleCell.textContent = `${payment.deal.vehicle.make} ${payment.deal.vehicle.model} ${payment.deal.vehicle.year}`;
+            row.appendChild(vehicleCell);
+
+            const contactCell = document.createElement('td');
+            contactCell.textContent = payment.deal.customer.phone;
+            row.appendChild(contactCell);
+
+            paymentTable.appendChild(row);
+        });
+    })
   </script>
 </body>
 </html>

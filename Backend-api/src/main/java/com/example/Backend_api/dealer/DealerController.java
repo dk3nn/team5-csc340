@@ -36,5 +36,8 @@ public class DealerController {
         return ResponseEntity.ok(dealerService.getDealerById(id));
     }
 
-
+    @GetMapping("dealer/signin")
+    public ResponseEntity<Dealer> authenticateDealer(@RequestParam String email, @RequestParam String password) {
+        return ResponseEntity.ok(dealerService.authenticate(email, password));
+    }
 }
