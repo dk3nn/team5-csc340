@@ -42,6 +42,17 @@
     </div>
 
     <script>
+        const signUpButton = document.getElementById('signup-btn');
+        const loginButton = document.getElementById('login-btn');
+
+        signUpButton.addEventListener('click', () => {
+            window.location.href = 'signup.html';
+        });
+        loginButton.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+
     container = document.getElementById('car-listings')
     carInventory.cars.forEach(car => { 
             const card = document.createElement('div');
