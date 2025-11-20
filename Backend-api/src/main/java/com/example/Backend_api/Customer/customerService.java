@@ -30,5 +30,16 @@ public class customerService {
         customerRepository.deleteById(cId);
     }
 
+    public customer authenticate(String username, String password) {
+        customer customer = customerRepository.findByUsername(username)
+        .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
+
+        if (!customer.getPassword().equals(password)) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        return customer;
+    }
+
   
 }

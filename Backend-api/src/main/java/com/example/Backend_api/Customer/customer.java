@@ -47,8 +47,8 @@ public class customer {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "country")
-    private String country;
+    @Column(name = "State")
+    private String state;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -60,25 +60,25 @@ public class customer {
 
    // }
 
-    public customer(String name, String email, String phone, String address, String city, String country, String username, String password) {
+    public customer(String name, String email, String phone, String address, String city, String state, String username, String password) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.city = city;
-        this.country = country;
+        this.state = state;
         this.username = username;
         this.password = password;
     }
 
-    public customer(Long cId, String name, String email, String phone, String address, String city, String country, String username, String password) {
+    public customer(Long cId, String name, String email, String phone, String address, String city, String state, String username, String password) {
         this.cId = cId;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.city = city;
-        this.country = country;
+        this.state = state;
         this.username = username;
         this.password = password;
     }
@@ -131,12 +131,12 @@ public class customer {
         this.city = city;
     }
 
-    public String getCountry() {
-        return country;
+    public String getState() {
+        return state;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getUsername() {
