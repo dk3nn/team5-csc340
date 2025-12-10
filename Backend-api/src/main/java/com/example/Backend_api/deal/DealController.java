@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Backend_api.payment.Payment;
 import com.example.Backend_api.payment.PaymentRepository;
+import com.example.Backend_api.vehicle.VehicleService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/deals")
@@ -18,6 +20,7 @@ public class DealController {
 
     private final DealService dealService;
     private final PaymentRepository PaymentRepository;
+    private final VehicleService vehicleService;
 
     @GetMapping
     public List<Deal> getDeals() {
@@ -27,9 +30,10 @@ public class DealController {
     @PostMapping
     public Deal createDeal(@RequestBody Deal deal) {
         Deal newDeal = dealService.saveDeal(deal);
+        vehicleService.markVehicleAsSold(newDeal.getVehicle().getId());
         LocalDate currentDate = LocalDate.now();
         if (newDeal.getIsFinanced()){
-            Double paymentAmount = newDeal.getDealAmount() - newDeal.getDownPayment() / 12; 
+            Double paymentAmount = (newDeal.getDealAmount() - newDeal.getDownPayment()) / 12; 
             for (int i = 0; i < 12; i++) {
                 Payment newPayment = new Payment();
                 newPayment.setDeal(newDeal);
@@ -72,6 +76,21 @@ public class DealController {
     @DeleteMapping("/{id}")
     public void deleteDeal(@PathVariable Long id) {
         dealService.deleteDeal(id);
+    }
+
+    @GetMapping("/dealer/totalprofit/{dealerId}")
+    public Double calculateTotalProfitByDealerId(@PathVariable Long dealerId) {
+        return dealService.calculateTotalProfitByDealerId(dealerId);
+    }
+
+    @GetMapping("/dealer/yearlysales/{dealerId}")
+    public Double calculateTotalProfitOfyearSalesByDealerId(@PathVariable Long dealerId) {
+        return dealService.calculateTotalProfitOfyearSalesByDealerId(dealerId);
+    }
+
+    @GetMapping("/dealer/monthlydeals/{dealerId}")
+    public Long countDealsOfMonthByDealerId(@PathVariable Long dealerId) {
+        return dealService.countDealsOfMonthByDealerId(dealerId);
     }
 
 }

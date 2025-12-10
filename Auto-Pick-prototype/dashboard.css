@@ -2,6 +2,8 @@
 #dashboard-body{
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 140px);
+  width: 100vw;
 }
 .sidebar {
   width: 20vw;
@@ -42,7 +44,7 @@
 
 .main-content {
   flex-grow: 1;
-  height: 100vh;
+  height: 100%;
   width: 80vw;
   overflow: auto;
   scroll-behavior: smooth;
@@ -69,30 +71,97 @@ p {
   color: #7f8c8d;
 }
 
-form {
-  display: grid;
-  gap: 15px;
-  max-width: 600px;
-  margin: 0 auto;
+#add-vehicle-form, #sell-vehicle-form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-label {
-  font-size: 16px;
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-input, textarea {
-  padding: 10px;
-  font-size: 16px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+legend {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0 10px;
+    color: #0056b3;
 }
 
-textarea {
+.form-group {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 500;
+    text-align: right;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+  min-height: 80px;
   resize: vertical;
 }
 
-#inventory, #finance, #add-new-car{
+.vin-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.vin-input-group input {
+    flex-grow: 1;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    width: 100%;
+    font-size: 1.1rem;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+
+#inventory, #finance, #add-new-car, #sell-form {
     display: none;
 }
 
@@ -116,6 +185,10 @@ textarea {
   flex: 1;
   max-width: 250px;
   min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 
@@ -163,8 +236,7 @@ textarea {
   width: 200px;
 }
 
-
-#car-listings {
+#car-listings, #dashboard-car-listings {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
@@ -202,6 +274,15 @@ textarea {
   background-color: #a01616;
 }
 
+
+.sold-btn{
+  background-color: #383434;
+}
+
+.sold-btn:hover{
+  background-color: #1c1a1a;
+}
+
 .sell-btn:hover{
   background-color: #bc1313;
 }
@@ -237,9 +318,70 @@ textarea {
 #payment-table td{
   padding: 5px 0;
 }
-#payment-table tr:nth-child(even){
+#payment-table tr:nth-child(odd){
   background-color: #787676;
 }
 #payment-table tr{
   padding: 0 5px;
+}
+
+#dealerUsername{
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #0e9fc6;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+#loading-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #4f67ff;
+    box-shadow: 0 0 5px rgba(79, 103, 255, 0.4);
+}
+
+select option {
+    padding: 10px;
+    color: #333;
 }

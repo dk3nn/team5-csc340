@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="review.css">
     <script src="samplecardata.js"></script>
     <title>Auto-Pick Home</title>
 </head>
@@ -12,33 +14,132 @@
         <div id="navbar">
             <h2 id="name">Auto-Pick</h2>
             <div id="navbar-links">
-                <a href="index.html">Home</a>
+                <a href="home.html">Home</a>
                 <a href="#">About</a>
                 <a href="#">Contact</a>
             </div>
         </div>
         <div id="heading">
-            <h1 style="text-align: center;">Welcome to Auto-Pick</h1>
-            <p style="text-align: center;">Your next car just a click away</p>
+            <h1 style="text-align: center;">Welcome to Auto-Pick Dealer Information</h1>
+            <p style="text-align: center;"></p>
         </div>
+        
         <div id="outer-container">
-            <h1>Seller Name</h1>
-            <h2>seller details</h2>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <p><strong>Reviewer Name: </strong>Text</p>
-            <textarea> </textarea>
-            <button>Publish Review</button>
+            <div id="dealer-info">
+                <div id="dealer-details"></div>
+                <div id="dealer-reviews">
+                    <div class="review-card-container">
+                        
+                    </div>
+                    <div class="add-review-section">
+                        <h3>Add a Review</h3>
+                        <textarea id="review-text" rows="4" cols="50" placeholder="Write your review here..."></textarea>
+                        <br>
+                        <button id="submit-review-btn" type="button">Submit Review</button>
+                    </div>
+                </div>
+            </div>
+            <h2>Dealer's Vehicle Listings</h2>
+            <div id="car-listings">
+
+            </div>
         </div>
         <div id="footer">
             <p>Copyright 2025</p>
         </div>
     </div>
+
+    <script>
+        // get url parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const dealerId = urlParams.get('id');
+
+        const outerContainer = document.getElementById('outer-container');
+        const dealerInfo = document.getElementById('dealer-details');
+        container = document.getElementById('car-listings');
+
+        // fetch dealer information
+        fetch(`http://localhost:8080/api/dealers/${dealerId}`)
+            .then(response => response.json())
+            .then(dealer => {
+
+                const dealerName = document.createElement('h3');
+                dealerName.textContent = dealer.name;
+
+                const dealerEmail = document.createElement('p');
+                dealerEmail.innerHTML = `<strong>Email: </strong>${dealer.email}`;
+
+                const dealerPhone = document.createElement('p');
+                dealerPhone.innerHTML = `<strong>Phone: </strong>${dealer.phoneNumber}`;
+
+                const dealerAddress = document.createElement('p');
+                dealerAddress.innerHTML = `<strong>Address: </strong>${dealer.address}`;
+
+                dealerInfo.appendChild(dealerName);
+                dealerInfo.appendChild(dealerEmail);
+                dealerInfo.appendChild(dealerPhone);
+                dealerInfo.appendChild(dealerAddress);
+
+                
+            });
+
+            // Get dealers vehicles
+            fetch(`http://localhost:8080/api/vehicles/dealer/${dealerId}`)
+            .then(response => response.json())
+            .then(vehicles => {
+                populateCars(vehicles);
+
+            })
+            .catch(error => {
+                console.error('Error fetching dealer vehicles:', error);
+            });
+
+
+        function populateCars(carInventory) {
+            carInventory.forEach(car => { 
+                    const card = document.createElement('div');
+                    card.className = 'car-card';
+
+                    const img = document.createElement('img');
+                    img.src = car.imageUrl;
+                    img.alt = name
+
+                    const cardTextArea = document.createElement('div')
+                    cardTextArea.className = "card-text-area"
+
+                    const cardHeading = document.createElement('h3');
+                    cardHeading.textContent = car.make + " " + car.model + " " + car.trim +" " + car.year;
+
+                    const carMilage = document.createElement('p');
+                    carMilage.innerHTML = "<strong>Milage: </strong>" + car.mileage;
+
+                    const carEngineType = document.createElement('p');
+                    carEngineType.innerHTML = "<strong>Engine Size: </strong>" + car.engineSize;
+
+                    const carPrice = document.createElement('p');
+                    carPrice.innerHTML = "<strong>Price: </strong>$" + car.price;
+
+                    const btnContainer = document.createElement('div')
+                    btnContainer.className = 'card-btn-container'
+
+
+                    const detailButton = document.createElement('button');
+                    detailButton.textContent = "View Details";
+                    detailButton.type ="button";
+
+                    btnContainer.append(detailButton);
+
+                    container.appendChild(card);
+                    card.appendChild(img);
+                    card.appendChild(cardTextArea);
+                    cardTextArea.appendChild(cardHeading);
+                    cardTextArea.appendChild(carMilage);
+                    cardTextArea.appendChild(carEngineType);
+                    cardTextArea.appendChild(carPrice);
+                    card.appendChild(btnContainer);
+
+                });
+        }
+    </script>
 </body>
 </html>

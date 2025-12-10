@@ -41,8 +41,24 @@ public class DealerService {
                 .orElseThrow(() -> new IllegalArgumentException("Dealer with email " + email + " not found."));
     }
 
+    public void deleteDealer(Long id){
+        if(!dealerRipository.existsById(id)){
+            throw new IllegalArgumentException("Dealer with id " + id + " not found.");
+        }
+        dealerRipository.deleteById(id);
+    }
+
     public List<Dealer> getAllDealers(){
         return dealerRipository.findAll();
+    }
+
+    public Dealer authenticate(String email, String password){
+        Dealer dealer = dealerRipository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Dealer with email " + email + " not found."));
+        if(!dealer.getPassword().equals(password)){
+            throw new IllegalArgumentException("Invalid password for dealer with email " + email + ".");
+        }
+        return dealer;
     }
 
 }

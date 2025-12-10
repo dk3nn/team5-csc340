@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="home.css">
-    <script src="samplecardata.js"></script>
     <title>Auto-Pick Home</title>
 </head>
 <body>
@@ -13,7 +12,7 @@
         <div id="navbar">
             <h2 id="name">Auto-Pick</h2>
             <div id="navbar-links">
-                <a href="index.html">Home</a>
+                <a href="home.html">Home</a>
                 <a href="#">About</a>
                 <a href="#">Contact</a>
             </div>
@@ -42,46 +41,91 @@
     </div>
 
     <script>
-    container = document.getElementById('car-listings')
-    carInventory.cars.forEach(car => { 
-            const card = document.createElement('div');
-            card.className = 'car-card';
+        const signUpButton = document.getElementById('signup-btn');
+        const loginButton = document.getElementById('login-btn');
 
-            const img = document.createElement('img');
-            img.src = car.image;
-            img.alt = name
-
-            const cardTextArea = document.createElement('div')
-            cardTextArea.className = "card-text-area"
-
-            const cardHeading = document.createElement('h3');
-            cardHeading.textContent = car.make + " " + car.model + " " + car.trim +" " + car.year;
-
-            const carMilage = document.createElement('p');
-            carMilage.innerHTML = "<strong>Milage: </strong>" + car.mileage;
-
-            const carEngineType = document.createElement('p');
-            carEngineType.innerHTML = "<strong>Engine Type: </strong>" + car.engineType
-
-            const btnContainer = document.createElement('div')
-            btnContainer.className = 'card-btn-container'
-
-
-            const detailButton = document.createElement('button');
-            detailButton.textContent = "View Details";
-            detailButton.type ="button";
-
-            btnContainer.append(detailButton);
-
-            container.appendChild(card);
-            card.appendChild(img);
-            card.appendChild(cardTextArea);
-            cardTextArea.appendChild(cardHeading);
-            cardTextArea.appendChild(carMilage);
-            cardTextArea.appendChild(carEngineType);
-            card.appendChild(btnContainer);
-             
+        signUpButton.addEventListener('click', () => {
+            window.location.href = 'signup.html';
         });
+        loginButton.addEventListener('click', () => {
+            window.location.href = 'provider/login.html';
+        });
+
+
+    container = document.getElementById('car-listings')
+    fetch('http://localhost:8080/api/vehicles/unsold')
+        .then(response => response.json())
+        .then(data => {
+            populateCars(data);
+        })
+        .catch(error => {
+            console.error('Error fetching car data:', error);
+        });
+
+    const searchButton = document.getElementById('search');
+    searchButton.addEventListener('click', () => {
+        const searchInput = document.querySelector('#search input').value;
+        fetch('http://localhost:8080/api/vehicles/unsold/search?make=' + encodeURIComponent(searchInput))
+            .then(response => response.json())
+            .then(data => {
+                container.innerHTML = '';
+                populateCars(data);
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+            });
+    });
+
+    function populateCars(carInventory) {
+
+        carInventory.forEach(car => { 
+                const card = document.createElement('div');
+                card.className = 'car-card';
+
+                const img = document.createElement('img');
+                img.src = car.imageUrl;
+                img.alt = name
+
+                const cardTextArea = document.createElement('div')
+                cardTextArea.className = "card-text-area"
+
+                const cardHeading = document.createElement('h3');
+                cardHeading.textContent = car.make + " " + car.model + " " + car.trim +" " + car.year;
+
+                const carMilage = document.createElement('p');
+                carMilage.innerHTML = "<strong>Milage: </strong>" + car.mileage;
+
+                const carEngineType = document.createElement('p');
+                carEngineType.innerHTML = "<strong>Engine Size: </strong>" + car.engineSize;
+
+                const carPrice = document.createElement('p');
+                carPrice.innerHTML = "<strong>Price: </strong>$" + car.price;
+
+                const carDealer = document.createElement('p');
+                carDealer.innerHTML = "<strong>Dealer: </strong><a href='review.html?id=" + car.dealer.id + "'>" + car.dealer.name + "</a>";
+
+                const btnContainer = document.createElement('div')
+                btnContainer.className = 'card-btn-container'
+
+
+                const detailButton = document.createElement('button');
+                detailButton.textContent = "View Details";
+                detailButton.type ="button";
+
+                btnContainer.append(detailButton);
+
+                container.appendChild(card);
+                card.appendChild(img);
+                card.appendChild(cardTextArea);
+                cardTextArea.appendChild(cardHeading);
+                cardTextArea.appendChild(carMilage);
+                cardTextArea.appendChild(carEngineType);
+                cardTextArea.appendChild(carPrice);
+                cardTextArea.appendChild(carDealer);
+                card.appendChild(btnContainer);
+
+            });
+    }
   </script>
 </body>
 </html>

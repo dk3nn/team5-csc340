@@ -26,6 +26,9 @@ public class Vehicle {
     
     @Column(nullable = false)
     private Integer year;
+
+    @Column
+    private String trim;
     
     @Column(nullable = false)
     private String color;

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../home.css">
+    <link rel="stylesheet" href="../signup.css">
+    <title>Auto-Pick Login</title>
+</head>
+<body>
+    <div id="home-body">
+        <div id="navbar">
+            <h2 id="name" style="color: #fff;">Auto-Pick</h2>
+            <div id="navbar-links">
+                <a href="home.html">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <div id="btn-container">
+                <button type="button" id="signup-btn">Sign Up</button>
+                <button type="button" id="login-btn">LogIn</button>
+            </div>
+        </div>
+        <div id="heading">
+            <h1 style="text-align: center;">Welcome to Auto-Pick</h1>
+            <p style="text-align: center;">Your first step in finding a new car</p>
+        </div>
+        <div id="signup-outer-container">
+            <div class="signup-wrapper">
+                <form id="signup-form">
+                    <h1>Dealer Sign Up</h1>
+
+                    <label>Full Name
+                        <input type="text" id="dealername" required>
+                    </label>
+
+                    <label>Email Address
+                        <input type="email" id="email" required>
+                    </label>
+
+                    <label>Phone Number
+                        <input type="text" id="phone" required>
+                    </label>
+
+                    <label>Address
+                        <input type="text" id="address" required>
+                    </label>
+
+                    <label>Password
+                        <input type="password" id="password" required>
+                    </label>
+
+                    <label>Confirm Password
+                        <input type="password" id="confirmPassword" required>
+                    </label>
+
+                    <button type="submit" id="signup-btn">Create Account</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>Copyright 2025</p>
+        </div>
+    </div>
+
+    <script>
+        const signUpButton = document.getElementById('signup-btn');
+        const loginButton = document.getElementById('login-btn');
+
+        signUpButton.addEventListener('click', () => {
+            window.location.href = 'signup.html';
+        });
+        loginButton.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+
+        const signupForm = document.getElementById('signup-form');
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('dealername').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            console.log(name)
+
+            try {
+                const response = await fetch('http://127.0.0.1:8080/api/dealers', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        phoneNumber: phone,
+                        address: address,
+                        password: password   
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error('Signup failed');
+                }
+                alert('Signup successful! Please log in.');
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Signup failed: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

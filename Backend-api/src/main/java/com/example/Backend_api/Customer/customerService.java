@@ -35,6 +35,8 @@ public class customerService {
         customerRepository.deleteById(cId);
     }
 
+    public List<customer> getAllCustomers() {
+        return customerRepository.findAll();
     public customer authenticate(String username, String password) {
         customer customer = customerRepository.findByUsername(username)
         .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
