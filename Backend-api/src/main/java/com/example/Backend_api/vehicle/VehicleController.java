@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/vehicles")
 @RequiredArgsConstructor
@@ -85,9 +85,5 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.findByModelContainingIgnoreCaseAndSoldAndDealerId(model, true, dealerId));
     }
 
-    @GetMapping("/dealer/make/search/{dealerId}")
-    public ResponseEntity<List<Vehicle>> searchVehiclesByMakeAndDealerId(@PathVariable Long dealerId, @RequestParam String make) {
-        return ResponseEntity.ok(vehicleService.findByDealerIdAndMakeMakeContainingIgnoreCase(dealerId, make));
-    }
 
 }

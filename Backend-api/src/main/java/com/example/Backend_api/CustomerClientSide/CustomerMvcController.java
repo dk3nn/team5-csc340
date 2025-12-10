@@ -22,21 +22,24 @@ import com.example.Backend_api.Review.reviewService;
 import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.vehicle.VehicleService;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @Controller
 @RequestMapping("/customer")
 public class CustomerMvcController {
     private final customerService customerService;
     private final VehicleService vehicleService;
     private final DealService dealService;
+    private final DealerService dealerService;
     private final PaymentService paymentService;
     private final reviewService reviewService;
 
     public CustomerMvcController(customerService customerService, VehicleService vehicleService,
-            DealService dealService, PaymentService paymentService,
+            DealService dealService, DealerService dealerService, PaymentService paymentService,
             reviewService reviewService) {
         this.customerService = customerService;
         this.vehicleService = vehicleService;
         this.dealService = dealService;
+        this.dealerService = dealerService;
         this.paymentService = paymentService;
         this.reviewService = reviewService;
     }
@@ -234,17 +237,17 @@ public class CustomerMvcController {
         return "customer/vehicleDetails";
     }
 
-    @GetMapping("/vehicles/saved")
-    public String savedVehicles(HttpSession session, Model model) {
-        Long customerId = (Long) session.getAttribute("customerID");
-        if (customerId == null) {
-            return "redirect:/customer/login";
-        }
-        customer cust = customerService.getCustomerById(customerId);
-        List<Vehicle> savedVehicles = cust.getSavedVehicles();
-        model.addAttribute("vehicles", savedVehicles);
-        return "customer/savedVehicles";
-    }
+    // @GetMapping("/vehicles/saved")
+    // public String savedVehicles(HttpSession session, Model model) {
+    //     Long customerId = (Long) session.getAttribute("customerID");
+    //     if (customerId == null) {
+    //         return "redirect:/customer/login";
+    //     }
+    //     customer cust = customerService.getCustomerById(customerId);
+    //     List<Vehicle> savedVehicles = cust.getSavedVehicles();
+    //     model.addAttribute("vehicles", savedVehicles);
+    //     return "customer/savedVehicles";
+    // }
 
     @GetMapping("/vehicles/{dealerId}/reviews")
     public String dealerReviews(@PathVariable Long dealerId, Model model, HttpSession session)
@@ -253,7 +256,7 @@ public class CustomerMvcController {
         if (customerId == null) {
             return "redirect:/customer/login";
         }
-        Dealer dealer1 = DealerService.getDealerById(dealerId);
+        Dealer dealer1 = dealerService.getDealerById(dealerId);
         List<review> reviews = reviewService.getReviewsByDealer(dealer1);
         model.addAttribute("reviews", reviews);
         return "customer/dealerReviews";
@@ -266,7 +269,7 @@ public class CustomerMvcController {
             return "redirect:/customer/login";
         }
         customer cust1 = customerService.getCustomerById(customerId);
-        Dealer dealer1 = DealerService.getDealerById(dealerId);
+        Dealer dealer1 = dealerService.getDealerById(dealerId);
         model.addAttribute("dealer", dealer1);
         model.addAttribute("review", new review());
         return "customer/newReviewForm";

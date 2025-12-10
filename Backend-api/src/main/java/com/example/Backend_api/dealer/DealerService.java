@@ -31,7 +31,7 @@ public class DealerService {
         return dealerRipository.save(existingDealer);
     }
 
-    public static Dealer getDealerById(Long id){
+    public Dealer getDealerById(Long id){
         return dealerRipository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Dealer with id " + id + " not found."));
     }

@@ -47,7 +47,7 @@ public class VehicleService {
         vehicleRepository.deleteById(id);
     }
 
-    public static Vehicle getVehicleById(Long id) {
+    public Vehicle getVehicleById(Long id) {
         return vehicleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vehicle not found with id: " + id));
     }
@@ -86,8 +86,5 @@ public class VehicleService {
         return vehicleRepository.findByDealerIdAndSold(dealerId, sold);
     }
 
-    public List<Vehicle> findByDealerIdAndMakeMakeContainingIgnoreCase(Long dealerId, String make) {
-        return vehicleRepository.findByDealerIdAndMakeMakeContainingIgnoreCase(dealerId, make);
-    }
 
 }

@@ -16,7 +16,7 @@ public interface customerRepository extends JpaRepository<customer, Long> {
 
     Optional<customer> findByUsername(String username);
 
-    @Query("select sv from savedVehicles sv where sv.customer.cId = ?1")
-    List<customer> findSavedVehiclesBycId(Long cId);
+    // @Query("select sv from savedVehicles sv where sv.customer.cId = ?1")
+    // List<customer> findSavedVehiclesBycId(Long cId);
     
 }

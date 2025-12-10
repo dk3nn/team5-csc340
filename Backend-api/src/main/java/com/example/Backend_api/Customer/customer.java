@@ -57,14 +57,13 @@ public class customer {
     @Column(name = "password", nullable = false)
     private String password;
 
-    private List<Vehicle> savedVehicles;
     
 
    // public customer() {
 
    // }
 
-    public customer(String name, String email, String phone, String address, String city, String state, String username, String password, List<Vehicle> savedVehicles) {
+    public customer(String name, String email, String phone, String address, String city, String state, String username, String password) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -73,10 +72,9 @@ public class customer {
         this.state = state;
         this.username = username;
         this.password = password;
-        this.savedVehicles = savedVehicles;
     }
 
-    public customer(Long cId, String name, String email, String phone, String address, String city, String state, String username, String password, List<Vehicle> savedVehicles) {
+    public customer(Long cId, String name, String email, String phone, String address, String city, String state, String username, String password) {
         this.cId = cId;
         this.name = name;
         this.email = email;
@@ -86,7 +84,6 @@ public class customer {
         this.state = state;
         this.username = username;
         this.password = password;
-        this.savedVehicles = savedVehicles;
     }
 
     public Long getcId() {
@@ -161,13 +158,6 @@ public class customer {
         this.password = password;
     }
 
-    public List<Vehicle> getSavedVehicles() {
-        return savedVehicles;
-    }
-
-    public void setSavedVehicles(List<Vehicle> savedVehicles) {
-        this.savedVehicles = savedVehicles;
-    }
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("customer")

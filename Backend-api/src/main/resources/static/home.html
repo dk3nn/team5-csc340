@@ -111,6 +111,9 @@
                 const detailButton = document.createElement('button');
                 detailButton.textContent = "View Details";
                 detailButton.type ="button";
+                detailButton.onclick = function() {
+                    window.location.href = '/vehicles/' + car.id;
+                };
 
                 btnContainer.append(detailButton);
 

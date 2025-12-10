@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class customerService {
 
     private final customerRepository customerRepository;
+    private final VehicleService vehicleService;
 
     public customer getCustomerById(@PathVariable Long cId) {
         return customerRepository.findById(cId).orElse(null);
@@ -37,6 +38,8 @@ public class customerService {
 
     public List<customer> getAllCustomers() {
         return customerRepository.findAll();
+
+    }
     public customer authenticate(String username, String password) {
         customer customer = customerRepository.findByUsername(username)
         .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
@@ -48,19 +51,18 @@ public class customerService {
         return customer;
     }
 
-    public List getSavedVehicles(Long cId) {
-        return customerRepository.findSavedVehiclesBycId(cId);
+    // public List getSavedVehicles(Long cId) {
+    //     return customerRepository.findSavedVehiclesBycId(cId);
+    // }
 
-    }
-
-    public List<Vehicle> saveVehicletoList(Long cId, List<Vehicle> savedVehicles, long id) {
-        Vehicle vehicle = VehicleService.getVehicleById(id);
-        savedVehicles.add(vehicle);  
-        customer customer = getCustomerById(cId);
-        customer.setSavedVehicles(savedVehicles);
-        customerRepository.save(customer);
-        return savedVehicles;
-    }
+    // public List<Vehicle> saveVehicletoList(Long cId, List<Vehicle> savedVehicles, long id) {
+    //     Vehicle vehicle = vehicleService.getVehicleById(id);
+    //     savedVehicles.add(vehicle);  
+    //     customer customer = getCustomerById(cId);
+    //     customer.setSavedVehicles(savedVehicles);
+    //     customerRepository.save(customer);
+    //     return savedVehicles;
+    // }
 
   
 }
