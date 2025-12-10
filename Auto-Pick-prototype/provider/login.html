@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../home.css">
+    <link rel="stylesheet" href="../login.css">
     <title>Auto-Pick Login</title>
 </head>
 <body>
@@ -86,7 +86,7 @@
                 }
 
                 const dealer = await response.json();
-                window.location.href = `provider/dashboard.html?dealerId=${dealer.id}`;
+                window.location.href = `dashboard.html?dealerId=${dealer.id}`;
             } catch (error) {
                 alert('Login failed: ' + error.message);
             }

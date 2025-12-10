@@ -1,6 +1,8 @@
 package com.example.Backend_api.Customer;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -28,6 +30,10 @@ public class customerService {
 
     public void deleteCustomer(Long cId) {
         customerRepository.deleteById(cId);
+    }
+
+    public List<customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 
   

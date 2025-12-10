@@ -3,6 +3,9 @@ package com.example.Backend_api.dealer;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +46,10 @@ public class DealerController {
     }
 
     @PostMapping("signin")
-    public ResponseEntity<Dealer> authenticateDealer(@RequestParam String email, @RequestParam String password) {
-        return ResponseEntity.ok(dealerService.authenticate(email, password));
+    public ResponseEntity<Dealer> authenticateDealer(@RequestParam String email, @RequestParam String password, HttpSession session) {
+        Dealer dealer = dealerService.authenticate(email, password);
+        session.setAttribute("dealerid", dealer.getId());
+        return ResponseEntity.ok(dealer);
     }
+
 }

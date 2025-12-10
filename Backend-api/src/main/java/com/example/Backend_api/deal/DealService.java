@@ -1,5 +1,7 @@
 package com.example.Backend_api.deal;
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DealService {
     private final DealRepository dealRipository;
+    
 
     
     public Deal getDealByVehicleId(Long vehicleId) {
@@ -32,6 +35,20 @@ public class DealService {
 
     public void deleteDeal(Long id) {
         dealRipository.deleteById(id);
+    }
+
+    public Double calculateTotalProfitByDealerId(Long dealerId) {
+        return dealRipository.calculateTotalProfitByDealerId(dealerId);
+    }
+
+    public Double calculateTotalProfitOfyearSalesByDealerId(Long dealerId) {
+        LocalDate startDate = LocalDate.now().withDayOfYear(1);
+        return dealRipository.calculateTotalSalesByDealerIdAndDateRange(dealerId, startDate.toString());
+    }
+
+    public Long countDealsOfMonthByDealerId(Long dealerId) {
+        LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+        return dealRipository.countDealsByDealerIdAndDateRange(dealerId, startDate.toString());
     }
     
 }

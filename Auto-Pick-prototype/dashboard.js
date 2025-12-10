@@ -2,6 +2,7 @@
 function menuBtn(contentDiv){
     const mainContentDiv = document.querySelector('.main-content');
     const childMainDivs = mainContentDiv.querySelectorAll(':scope > div');
+    console.log(childMainDivs);
     const currentDiv = document.getElementById(contentDiv);
     childMainDivs.forEach(element => {
         element.style.display = 'none'

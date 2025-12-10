@@ -60,4 +60,34 @@ public class VehicleService {
         return vehicleRepository.findByDealerId(dealerId);
     }
 
+    public void markVehicleAsSold(Long vehicleId) {
+        Vehicle vehicle = getVehicleById(vehicleId);
+        vehicle.setSold(true);
+        vehicleRepository.save(vehicle);
+    }
+
+    public Long countVehiclesByDealerIdAndSoldStatus(Long dealerId, Boolean soldStatus) {
+        return vehicleRepository.countByDealerIdAndSoldStatus(dealerId, soldStatus);
+    }
+
+    public List<Vehicle> getVehiclesBySoldStatus(Boolean soldStatus) {
+        return vehicleRepository.getVehiclesBySoldStatus(soldStatus);
+    }
+
+    public List<Vehicle> findByMakeContainingIgnoreCaseAndUnSold(String make, boolean sold) {
+        return vehicleRepository.findByMakeContainingIgnoreCaseAndSold(make, sold);
+    }
+
+    public List<Vehicle> findByModelContainingIgnoreCaseAndSoldAndDealerId(String make, boolean sold, Long dealerId) {
+        return vehicleRepository.findByModelContainingIgnoreCaseAndSoldAndDealerId(make, sold, dealerId);
+    }
+
+    public List<Vehicle> findByDealerIdAndSold(Long dealerId, Boolean sold) {
+        return vehicleRepository.findByDealerIdAndSold(dealerId, sold);
+    }
+
+    public List<Vehicle> findByDealerIdAndMakeMakeContainingIgnoreCase(Long dealerId, String make) {
+        return vehicleRepository.findByDealerIdAndMakeMakeContainingIgnoreCase(dealerId, make);
+    }
+
 }

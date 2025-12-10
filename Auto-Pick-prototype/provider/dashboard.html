@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../dashboard.css">
   <link rel="stylesheet" href="../home.css">
   <script src="../dashboard.js"></script>
-  <script src="../samplecardata.js"></script>
 </head>
 <body>
 
@@ -47,31 +46,30 @@
             <div class="dashboard-cards">
                 
                 <div class="card">
-                    <h3>Total Cars Sold</h3>
-                    <p>150</p>
+                    <h3>Total Vehicles Sold</h3>
+                    <p id="total-vehicles-sold"></p>
                 </div>
-
                 
                 <div class="card">
-                    <h3>Cars in the Shop</h3>
-                    <p>35</p>
+                    <h3>Vehicles in the Shop</h3>
+                    <p id="vehicles-in-the-shop"></p>
                 </div>
 
                 
                 <div class="card">
                     <h3>Total Profit</h3>
-                    <p>$500,000</p>
+                    <p id="total-profit"></p>
                 </div>
                 
                 <div class="card">
                     <h3>This Year’s Profit</h3>
-                    <p>$125,000</p>
+                    <p id="this-year-profit"></p>
                 </div>
 
                 
                 <div class="card">
                     <h3>Cars Sold This Month</h3>
-                    <p>25</p>
+                    <p id="this-month-deals"></p>
                 </div>      
             </div>
         </div>
@@ -82,23 +80,13 @@
             <label>Search
                 <input id="search" type="text" name="inventory-search">
             </label>
-            <label>Sort
-                <input list="sort-values">
-            </label>
-            <datalist id="sort-values">
-                <option value="New to Older"></option>
-                <option value="Older to new"></option>
-                <option value="High to low Price"></option>
-                <option value="Low to High Price"></option>
-            </datalist>
             <label for="filter-values">Filter
-                <input list="filter-values">
+            <select id="filter-values">
+                <option selected value="All">All</option>
+                <option value="Sold">Sold</option>
+                <option value="Unsold">Unsold</option>
+            </select>
             </label>
-            <datalist id="filter-values">
-                <option value="SOld"></option>
-                <option value="Unsold"></option>
-                <option value="All"></option>
-            </datalist>
             </div>
 
             
@@ -253,7 +241,41 @@
             <button type="submit" id="save-form-btn" class="btn btn-primary">Add Vehicle</button>
         </form>
         </div>
+    
+
+
+        <div id="sell-form">
+            <div class="sell-form-content">
+                <h2>Sell Vehicle</h2>
+                <form id="sell-vehicle-form">
+                    <input type="hidden" id="sell-vehicle-id" name="vehicleId">
+                    <div class="form-group">
+                        <label for="customer-name">Customer Name</label>
+                        <select id="customer-name-options" name="customerCId" required>
+                            <option value="" disabled selected>Select a customer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="final-amount">Final Sale Amount ($)</label>
+                        <input type="number" id="final-amount" name="dealAmount" required min="0" step="1.00">
+                    </div>
+                    <label for="isfinanced">
+                        <input type="checkbox" id="isfinanced" name="isFinanced">
+                        Is the purchase financed for 12 months?
+                    </label>
+                    <div class="form-group">
+                        <label for="down-payment">Down Payment ($):</label>
+                        <input type="number" id="down-payment" name="downPayment" required min="0" step="1.00" disabled>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm Sale</button>
+                </form>
+            </div>
+        </div>
     </div>
+    </div>
+    <div id="loading-div">
+        <div class="loader"></div>
+
     </div>
     <div id="footer">
             <p>Copyright 2025</p>
@@ -265,6 +287,38 @@
     const editForm = document.createElement('add-vehicle-form');
     const urlParams = new URLSearchParams(window.location.search);
     const dealerId = urlParams.get('dealerId');
+
+
+    // Dashboard statistics
+    fetch(`http://127.0.0.1:8080/api/vehicles/dealer/soldCount/${dealerId}`)
+    .then(response => response.json())
+    .then(totalSold => {
+        document.getElementById('total-vehicles-sold').textContent = totalSold;
+    });
+
+    fetch(`http://127.0.0.1:8080/api/vehicles/dealer/unsoldCount/${dealerId}`)
+    .then(response => response.json())
+    .then(totalUnsold => {
+        document.getElementById('vehicles-in-the-shop').textContent = totalUnsold;
+    });
+
+    fetch(`http://127.0.0.1:8080/api/deals/dealer/yearlysales/${dealerId}`)
+    .then(response => response.json())
+    .then(totalProfit => {
+        document.getElementById('this-year-profit').textContent = `$${totalProfit}`;
+    });
+
+    fetch(`http://127.0.0.1:8080/api/deals/dealer/monthlydeals/${dealerId}`)
+    .then(response => response.json())
+    .then(totalDeals => {
+        document.getElementById('this-month-deals').textContent = totalDeals;
+    });
+
+    fetch(`http://127.0.0.1:8080/api/deals/dealer/totalprofit/${dealerId}`)
+    .then(response => response.json())
+    .then(totalProfit => {
+        document.getElementById('total-profit').textContent = `$${totalProfit}`;
+    });
 
 
     // Get username
@@ -281,7 +335,17 @@
     fetch("http://127.0.0.1:8080/api/vehicles/dealer/" + dealerId)
         .then(response => response.json())
         .then(carInventory => { 
-            carInventory.forEach(car => { 
+            populateInventory(carInventory);
+    });
+
+    //filter and search functionality
+    const filterSelect = document.getElementById('filter-values');
+    const searchInput = document.getElementById('search');
+   ;
+
+    function populateInventory(carInventory){
+        container.innerHTML = '';
+        carInventory.forEach(car => { 
             const card = document.createElement('div');
             card.className = 'car-card';
 
@@ -305,8 +369,15 @@
             btnContainer.className = 'card-btn-container'
 
             const sellBtn = document.createElement('button');
-            sellBtn.textContent = "Sell";
-            sellBtn.className = 'sell-btn'
+            if(car.sold){
+                sellBtn.disabled = true;
+                sellBtn.textContent = "Sold";
+                sellBtn.className = 'sold-btn'
+            }else{
+                sellBtn.textContent = "Sell";
+                sellBtn.className = 'sell-btn';
+            }
+            sellBtn.vehicleId = car.id;
             sellBtn.type ="button";
 
             const detailButton = document.createElement('button');
@@ -343,6 +414,12 @@
 
             detailButton.addEventListener('click', () => {
                 window.location.href = `vehicle-details.html?vehicleId=${car.id}`;
+            });
+
+            sellBtn.addEventListener('click', () => {
+                const vehicleId = sellBtn.vehicleId;
+                document.getElementById('sell-vehicle-id').value = vehicleId;
+                menuBtn('sell-form');
             });
 
             //editting button functionality
@@ -383,9 +460,11 @@
             });
 
             btnContainer.append(sellBtn);
+            if(!car.sold){
+                btnContainer.append(editButton);
+                btnContainer.append(deleteButton);
+            }
             btnContainer.append(detailButton);
-            btnContainer.append(editButton);
-            btnContainer.append(deleteButton);
 
             container.appendChild(card);
             card.appendChild(img);
@@ -395,7 +474,7 @@
             cardTextArea.appendChild(carEngineType);
             card.appendChild(btnContainer);     
         });
-    });
+    }
 
 
     // VIN Lookup Functionality
@@ -506,8 +585,77 @@
 
             paymentTable.appendChild(row);
         });
-    })
+    });
 
+    // get customers for sell form
+    fetch("http://127.0.0.1:8080/api/customers")
+    .then(response => response.json())
+    .then(customers => {
+        const customerSelect = document.getElementById('customer-name-options');
+        customers.forEach(customer => {
+            const option = document.createElement('option');
+            option.value = customer.cId;
+            option.textContent = customer.name;
+            customerSelect.appendChild(option);
+        });
+    });
+
+    // down payment handling
+    const downPaymentInput = document.getElementById('down-payment');
+    const isFinancedCheckbox = document.getElementById('isfinanced');
+    isFinancedCheckbox.addEventListener('change', () => {
+        if (isFinancedCheckbox.checked) {
+            downPaymentInput.disabled = false;
+        } else {
+            downPaymentInput.disabled = true;
+            downPaymentInput.value = document.getElementById('final-amount').value;
+        }
+    });
+
+    // sell form submission handling
+    const sellVehicleForm = document.getElementById('sell-vehicle-form');
+    sellVehicleForm.addEventListener('submit', async (event) => {
+        document.getElementById('loading-div').style.display = 'block';
+        event.preventDefault();
+
+        const formData = new FormData(sellVehicleForm);
+        const sellData = Object.fromEntries(formData.entries());
+        sellData.isFinanced = document.getElementById('isfinanced').checked ? true : false;
+        sellData.dealer = {id: dealerId};
+        sellData.vehicle = {id: sellData.vehicleId};
+        sellData.customer = {cId: sellData.customerCId};
+        delete sellData.customerCId;
+        delete sellData.vehicleId;
+        sellData.dealDate = new Date().toISOString();
+        if(!sellData.isFinanced){
+            sellData.downPayment = sellData.dealAmount;
+        }else{
+            sellData.downPayment = sellData.downPayment;
+        }
+        try {
+            const response = await fetch('http://127.0.0.1:8080/api/deals', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(sellData),
+            });
+            if (response.ok) {
+                alert('Vehicle sold successfully!');
+                window.location.reload();
+            } else {
+                const errorData = await response.json();
+                alert('Failed to sell vehicle: ' + (errorData.message || 'Unknown error'));
+                document.getElementById('loading-div').style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Error selling vehicle:', error);
+            alert('Failed to sell vehicle. Please try again later.');
+            document.getElementById('loading-div').style.display = 'none';
+        }
+    });
+
+    
 
   </script>
 </body>
