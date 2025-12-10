@@ -58,7 +58,7 @@
         </div>
         <div id="login-outer-container">
             <div id="login-container">
-                <h1>Log In</h1>
+                <h1>Customer Log In</h1>
                     <form action="customer/login" method="post">
                     <label for="customerUsername" class="form-label">Username</label>
                     <input type="text" class="form-control" id="customerUsername" name="username" required>
@@ -68,6 +68,7 @@
 
                   <button type="submit" class="btn btn-primary">Login</button>
                <a href="/customer/signup">Need an account? Sign Up</a>
+               <button type="button" onclick="window.location.href='/dealerSignin'">Dealer Log In</button>
             </div>
         </div>
 

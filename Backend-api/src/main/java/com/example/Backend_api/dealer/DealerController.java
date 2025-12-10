@@ -45,11 +45,28 @@ public class DealerController {
         return ResponseEntity.ok(dealerService.getDealerById(id));
     }
 
-    @PostMapping("signin")
+    @PostMapping("/signin")
     public ResponseEntity<Dealer> authenticateDealer(@RequestParam String email, @RequestParam String password, HttpSession session) {
         Dealer dealer = dealerService.authenticate(email, password);
         session.setAttribute("dealerid", dealer.getId());
         return ResponseEntity.ok(dealer);
+    }
+
+    @GetMapping("/session")
+    public ResponseEntity<Dealer> getDealerFromSession(HttpSession session) {
+        Long dealerId = (Long) session.getAttribute("dealerid");
+        if (dealerId != null) {
+            Dealer dealer = dealerService.getDealerById(dealerId);
+            return ResponseEntity.ok(dealer);
+        } else {
+            return ResponseEntity.status(401).build();
+        }
+    }
+
+    @GetMapping("/signout")
+    public ResponseEntity<String> signOutDealer(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.ok("Signed out successfully");
     }
 
 }

@@ -22,7 +22,7 @@ import com.example.Backend_api.Review.reviewService;
 import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.vehicle.VehicleService;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @Controller
 @RequestMapping("/customer")
 public class CustomerMvcController {
@@ -223,15 +223,15 @@ public class CustomerMvcController {
     public String browseVehicles(Model model) {
         List<Vehicle> availableVehicles = vehicleService.getAllVehicles();
         model.addAttribute("Vehicles", availableVehicles);
-        return "customer/vehicles";
+        return "Customer/vehicles";
     }
 
     @GetMapping("/vehicles/{id}")
-    public String vehicleDetails(@PathVariable Long id, Model model, HttpSession session) {
-        Long customerId = (Long) session.getAttribute("customerID");
-        if (customerId == null) {
-            return "redirect:/customer/login";
-        }
+    public String vehicleDetails(@PathVariable Long id, Model model) {
+        // Long customerId = (Long) session.getAttribute("customerID");
+        // if (customerId == null) {
+        //     return "redirect:/customer/login";
+        // }
         Vehicle vehicle = vehicleService.getVehicleById(id);
         model.addAttribute("vehicle", vehicle);
         return "customer/vehicleDetails";
@@ -274,8 +274,5 @@ public class CustomerMvcController {
         model.addAttribute("review", new review());
         return "customer/newReviewForm";
     }
-
-
-
 
 }

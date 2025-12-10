@@ -98,7 +98,7 @@
         </div>
         <div id="signup-outer-container">
             <div id="signup-container">
-                <h1>Sign up</h1>
+                <h1>Customer Sign up</h1>
                 
                 <form action="/customer/signup" method="post">
                     <div>
@@ -152,6 +152,7 @@
                 <div>
                     <a href="/login">Already have an account? Log in</a>
                 </div>
+                <button type="button" onclick="window.location.href='/dealerSignup'">Dealer Sign Up</button>
             </div>
         </div>
 

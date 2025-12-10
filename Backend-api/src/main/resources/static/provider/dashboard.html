@@ -20,6 +20,7 @@
             </div>
             <div id="btn-container">
                 <a id="dealerUsername"></a>
+                <button id="logout-btn" style="display: none;" onclick="signout()">Log Out</button>
             </div>
         </div>
         <div id="heading">
@@ -287,6 +288,19 @@
     const editForm = document.createElement('add-vehicle-form');
     const urlParams = new URLSearchParams(window.location.search);
     const dealerId = urlParams.get('dealerId');
+
+    //logout button
+    fetch('http://127.0.0.1:8080/api/dealers/session')
+    .then(response => {
+        if (response.ok) {
+            document.getElementById('logout-btn').style.display = 'inline';
+        } else {
+            document.getElementById('logout-btn').style.display = 'none';
+            window.location.href = 'http://127.0.0.1:8080/';
+        }
+    });
+    const logoutButton = document.getElementById('logout-btn');
+    function signout(){ window.location.href='http://127.0.0.1:8080/api/dealers/signout'; window.location = 'http://127.0.0.1:8080/'; }
 
 
     // Dashboard statistics

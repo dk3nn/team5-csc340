@@ -27,9 +27,17 @@ public class HomeMvcController {
 
     @GetMapping("/")
     public String home(Model model){
-        List<Vehicle>  featuredVehicles = vehicleService.getAllVehicles().stream().limit(3).toList();
-        model.addAttribute("vehicles", featuredVehicles);
-        return "home";
+        return "redirect:home.html";
+    }
+
+    @GetMapping("/dealerSignup")
+    public String dealerSignup(){
+        return "redirect:provider/signup.html";
+    }
+
+    @GetMapping("/dealerSignin")
+    public String dealerSignin(){
+        return "redirect:provider/login.html";
     }
 
     @GetMapping("/signup")

@@ -12,13 +12,14 @@
         <div id="navbar">
             <h2 id="name">Auto-Pick</h2>
             <div id="navbar-links">
-                <a href="home.html">Home</a>
+                <a href="http://127.0.0.1:8080/">Home</a>
                 <a href="#">About</a>
                 <a href="#">Contact</a>
             </div>
             <div id="btn-container">
                 <button type="button" id="signup-btn">Sign Up</button>
                 <button type="button" id="login-btn">LogIn</button>
+                <button type="button" id="logout-btn" style="display: none;" onclick="signout()">Log Out</button>
             </div>
         </div>
         <div id="heading">
@@ -43,9 +44,11 @@
     <script>
         const signUpButton = document.getElementById('signup-btn');
         const loginButton = document.getElementById('login-btn');
+        const logoutButton = document.getElementById('logout-btn');
+        function signout(){ window.location.href='http://127.0.0.1:8080/api/dealers/signout'; window.location.reload(); }
 
         signUpButton.addEventListener('click', () => {
-            window.location.href = 'signup.html';
+            window.location.href = 'provider/signup.html';
         });
         loginButton.addEventListener('click', () => {
             window.location.href = 'provider/login.html';
@@ -112,7 +115,7 @@
                 detailButton.textContent = "View Details";
                 detailButton.type ="button";
                 detailButton.onclick = function() {
-                    window.location.href = '/vehicles/' + car.id;
+                    window.location.href = 'http://127.0.0.1:8080/customer/vehicles/' + car.id;
                 };
 
                 btnContainer.append(detailButton);
@@ -129,6 +132,24 @@
 
             });
     }
+
+    fetch('http://127.0.0.1:8080/api/dealers/session')
+        .then(response => response.json())
+        .then(dealer => {
+            if (dealer && dealer.id) {
+                signUpButton.style.display = 'none';
+                loginButton.style.display = 'none';
+                logoutButton.style.display = 'block';
+                console.log('Dealer logged in:', dealer);
+            } else {
+                // No dealer logged in
+                console.log('No dealer logged in');
+            }
+        })
+        .catch(error => {
+            console.error('Error checking dealer session:', error);
+        });
+
   </script>
 </body>
 </html>
