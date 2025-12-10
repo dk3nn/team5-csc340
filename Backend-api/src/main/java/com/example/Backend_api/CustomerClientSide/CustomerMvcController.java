@@ -12,9 +12,12 @@ import com.example.Backend_api.Customer.customer;
 import com.example.Backend_api.Customer.customerService;
 import com.example.Backend_api.deal.Deal;
 import com.example.Backend_api.deal.DealService;
+import com.example.Backend_api.dealer.Dealer;
+import com.example.Backend_api.dealer.DealerService;
 import com.example.Backend_api.payment.PaymentService;
 import com.example.Backend_api.payment.Payment;
 import com.example.Backend_api.Review.review;
+import com.example.Backend_api.Review.reviewRepository;
 import com.example.Backend_api.Review.reviewService;
 import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.vehicle.VehicleService;
@@ -170,16 +173,21 @@ public class CustomerMvcController {
                 cust.setUsername(newUsername);
             }
 
-            if (address != null)
+            if (address != null && !address.trim().isEmpty()){
                 cust.setAddress(address);
-            if (city != null)
+            }
+            if (city != null && !city.trim().isEmpty()){
                 cust.setCity(city);
-            if (state != null)
+            }
+            if (state != null && !state.trim().isEmpty()){
                 cust.setState(state);
-            if (email != null)
+            }
+            if (email != null && !email.trim().isEmpty()){
                 cust.setEmail(email);
-            if (phone != null)
+            }
+            if (phone != null && !phone.trim().isEmpty()){
                 cust.setPhone(phone);
+            }
 
             if (newPassword != null && !newPassword.trim().isEmpty() && !newPassword.equals(currentPassword)) {
                 cust.setPassword(newPassword);
@@ -194,6 +202,18 @@ public class CustomerMvcController {
             model.addAttribute("error", "Invalid Password: " + e.getMessage());
             return "customer/profile";
         }
+    }
+
+    @GetMapping("/delete/{cid}")
+    public String deleteAccount(@PathVariable Long cid, HttpSession session) {
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null || !customerId.equals(cid)) {
+            return "redirect:/customer/dashboard";
+        }
+
+        customerService.deleteCustomer(cid);
+        session.removeAttribute("customerID");
+        return "redirect:/";
     }
 
     @GetMapping("/vehicles")
@@ -214,7 +234,45 @@ public class CustomerMvcController {
         return "customer/vehicleDetails";
     }
 
-    // @GetMapping("/vehicles/saved")
-    // public String saveVehicle(@PathVariable Long id, Model model
+    @GetMapping("/vehicles/saved")
+    public String savedVehicles(HttpSession session, Model model) {
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null) {
+            return "redirect:/customer/login";
+        }
+        customer cust = customerService.getCustomerById(customerId);
+        List<Vehicle> savedVehicles = cust.getSavedVehicles();
+        model.addAttribute("vehicles", savedVehicles);
+        return "customer/savedVehicles";
+    }
+
+    @GetMapping("/vehicles/{dealerId}/reviews")
+    public String dealerReviews(@PathVariable Long dealerId, Model model, HttpSession session)
+    {
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null) {
+            return "redirect:/customer/login";
+        }
+        Dealer dealer1 = DealerService.getDealerById(dealerId);
+        List<review> reviews = reviewService.getReviewsByDealer(dealer1);
+        model.addAttribute("reviews", reviews);
+        return "customer/dealerReviews";
+    }
+
+    @GetMapping("/vehicles/{dealerId}/reviews/new")
+    public String newReviewForm(@PathVariable Long dealerId, Model model, HttpSession session){
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null) {
+            return "redirect:/customer/login";
+        }
+        customer cust1 = customerService.getCustomerById(customerId);
+        Dealer dealer1 = DealerService.getDealerById(dealerId);
+        model.addAttribute("dealer", dealer1);
+        model.addAttribute("review", new review());
+        return "customer/newReviewForm";
+    }
+
+
+
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.annotations.ManyToAny;
 
 import com.example.Backend_api.deal.Deal;
+import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.Review.review;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -56,11 +57,14 @@ public class customer {
     @Column(name = "password", nullable = false)
     private String password;
 
+    private List<Vehicle> savedVehicles;
+    
+
    // public customer() {
 
    // }
 
-    public customer(String name, String email, String phone, String address, String city, String state, String username, String password) {
+    public customer(String name, String email, String phone, String address, String city, String state, String username, String password, List<Vehicle> savedVehicles) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -69,9 +73,10 @@ public class customer {
         this.state = state;
         this.username = username;
         this.password = password;
+        this.savedVehicles = savedVehicles;
     }
 
-    public customer(Long cId, String name, String email, String phone, String address, String city, String state, String username, String password) {
+    public customer(Long cId, String name, String email, String phone, String address, String city, String state, String username, String password, List<Vehicle> savedVehicles) {
         this.cId = cId;
         this.name = name;
         this.email = email;
@@ -81,6 +86,7 @@ public class customer {
         this.state = state;
         this.username = username;
         this.password = password;
+        this.savedVehicles = savedVehicles;
     }
 
     public Long getcId() {
@@ -153,6 +159,14 @@ public class customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Vehicle> getSavedVehicles() {
+        return savedVehicles;
+    }
+
+    public void setSavedVehicles(List<Vehicle> savedVehicles) {
+        this.savedVehicles = savedVehicles;
     }
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)

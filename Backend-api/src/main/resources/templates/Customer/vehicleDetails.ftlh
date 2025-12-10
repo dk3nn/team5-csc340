@@ -309,7 +309,6 @@
             </div>
 
             <div class="action-buttons">
-                <a href="/customer/vehicles" class="btn btn-secondary">Back to Vehicles</a>
                 <a href="/customer/dashboard" class="btn btn-primary">Back to Dashboard</a>
                 <button class="btn btn-success">Save Vehicle</button>
                 <button class="btn btn-primary">Contact Dealer</button>

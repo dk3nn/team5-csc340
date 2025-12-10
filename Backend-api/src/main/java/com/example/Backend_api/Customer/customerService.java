@@ -1,8 +1,13 @@
 package com.example.Backend_api.Customer;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.Backend_api.vehicle.Vehicle;
+import com.example.Backend_api.vehicle.VehicleService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,6 +44,20 @@ public class customerService {
         }
 
         return customer;
+    }
+
+    public List getSavedVehicles(Long cId) {
+        return customerRepository.findSavedVehiclesBycId(cId);
+
+    }
+
+    public List<Vehicle> saveVehicletoList(Long cId, List<Vehicle> savedVehicles, long id) {
+        Vehicle vehicle = VehicleService.getVehicleById(id);
+        savedVehicles.add(vehicle);  
+        customer customer = getCustomerById(cId);
+        customer.setSavedVehicles(savedVehicles);
+        customerRepository.save(customer);
+        return savedVehicles;
     }
 
   
