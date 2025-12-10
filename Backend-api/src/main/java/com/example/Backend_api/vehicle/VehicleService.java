@@ -47,7 +47,7 @@ public class VehicleService {
         vehicleRepository.deleteById(id);
     }
 
-    public Vehicle getVehicleById(Long id) {
+    public static Vehicle getVehicleById(Long id) {
         return vehicleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vehicle not found with id: " + id));
     }
