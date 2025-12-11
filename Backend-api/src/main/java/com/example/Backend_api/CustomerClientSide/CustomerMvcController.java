@@ -124,6 +124,7 @@ public class CustomerMvcController {
         List<Vehicle> availableVehicles = vehicleService.getAllVehicles();
         model.addAttribute("customer", cust);
         model.addAttribute("vehicles", availableVehicles);
+        model.addAttribute("savedVehicles", customerService.getSavedVehicleIds(customerId));
         return "customer/dashboard";
     }
 

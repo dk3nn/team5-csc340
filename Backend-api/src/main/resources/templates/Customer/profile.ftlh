@@ -104,10 +104,11 @@
     <div id="home-body">
         <div id="navbar">
             <h2 id="name" style="color: #fff;">Auto-Pick</h2>
-            <a href="/customer/delete/${customer.cId}" 
-                onclick="return confirm('Are you sure you want to permanently delete your profile? This action cannot be undone.')">
+            <!--<a href="/customer/delete/${customer.cId!}" class="delete-profile-btn"
+                onclick="return confirm('Are you sure you want to permanently delete your profile? This action cannot be undone.');">
                 Delete Profile
-            </a <div>id="navbar-links">
+            </a>
+            -->
         </div>
         <div id="btn-container">
         </div>
