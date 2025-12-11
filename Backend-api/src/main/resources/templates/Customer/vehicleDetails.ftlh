@@ -307,12 +307,18 @@
                     </#if>
                 </div>
             </div>
-
+           <#if customerID??>
             <div class="action-buttons">
                 <a href="/customer/dashboard" class="btn btn-primary">Back to Dashboard</a>
-                <button class="btn btn-success">Save Vehicle</button>
+                <#if isFavorite?? && isFavorite>
+                    <a href="#" class="btn btn-secondary disabled">Saved</a>
+                    
+                <#else>
+                <a href="/customer/vehicle/favorites/${vehicle.id}" class="btn btn-success">Save Vehicle</a>
+                </#if>
                 <button class="btn btn-primary">Contact Dealer</button>
             </div>
+            </#if>
         </div>
     </div>
 </body>

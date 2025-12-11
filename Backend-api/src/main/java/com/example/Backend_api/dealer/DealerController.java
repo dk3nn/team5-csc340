@@ -63,6 +63,7 @@ public class DealerController {
         }
     }
 
+
     @GetMapping("/signout")
     public ResponseEntity<String> signOutDealer(HttpSession session) {
         session.invalidate();

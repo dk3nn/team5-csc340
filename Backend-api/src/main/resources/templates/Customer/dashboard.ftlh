@@ -337,8 +337,6 @@ textarea {
 
       <div id="saved">
         <h2>Your Saved Vehicles</h2>
-        <p>View your saved vehicles here</p>
-        <p>No saved vehicles yet.</p>
       </div>
 
     </div>
