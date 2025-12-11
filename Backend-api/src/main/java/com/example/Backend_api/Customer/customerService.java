@@ -33,7 +33,9 @@ public class customerService {
     }
 
     public void deleteCustomer(Long cId) {
+        if(customerRepository.existsById(cId)){
         customerRepository.deleteById(cId);
+        }
     }
 
     public List<customer> getAllCustomers() {
@@ -51,18 +53,43 @@ public class customerService {
         return customer;
     }
 
-    // public List getSavedVehicles(Long cId) {
-    //     return customerRepository.findSavedVehiclesBycId(cId);
-    // }
+    public void addVehicleToSaved(Long cId, Integer vehicleId) {
+        customer cust = getCustomerById(cId);
+        List<Integer> savedVehicleIds = cust.getSavedVehicleIds();
+        if (!savedVehicleIds.contains(vehicleId)) {
+            savedVehicleIds.add(vehicleId);
+            cust.setSavedVehicles(savedVehicleIds);
+            customerRepository.save(cust);
+        }
+    }
 
-    // public List<Vehicle> saveVehicletoList(Long cId, List<Vehicle> savedVehicles, long id) {
-    //     Vehicle vehicle = vehicleService.getVehicleById(id);
-    //     savedVehicles.add(vehicle);  
-    //     customer customer = getCustomerById(cId);
-    //     customer.setSavedVehicles(savedVehicles);
-    //     customerRepository.save(customer);
-    //     return savedVehicles;
-    // }
+    public void removeVehicleFromSaved(Long cId, Integer vehicleId) {
+        customer cust = getCustomerById(cId);
+        List<Integer> savedVehicleIds = cust.getSavedVehicleIds();
+        if (savedVehicleIds.contains(vehicleId)) {
+            savedVehicleIds.remove(vehicleId);
+            cust.setSavedVehicles(savedVehicleIds);
+            customerRepository.save(cust);
+        }
+    }
 
-  
+    public List<Vehicle> getSavedVehicleIds(Long cId) {
+        customer cust = getCustomerById(cId);
+        List<Integer> savedVehicleIds = cust.getSavedVehicleIds();
+        List<Vehicle> savedVehicles = new java.util.ArrayList<>();
+        for (Integer vehicleId : savedVehicleIds) {
+            Vehicle vehicle = vehicleService.getVehicleById(Long.valueOf(vehicleId));
+            if (vehicle != null) {
+                savedVehicles.add(vehicle);
+            }
+        }
+        return savedVehicles;
+    }
+
+    public boolean isVehicleSaved(Long cId, Long vehicleId) {
+        customer cust = getCustomerById(cId);
+        List<Integer> savedVehicleIds = cust.getSavedVehicleIds();
+        return savedVehicleIds.contains(vehicleId.intValue());
+    }
+
 }

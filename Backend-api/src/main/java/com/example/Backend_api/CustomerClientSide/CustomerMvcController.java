@@ -1,26 +1,26 @@
 package com.example.Backend_api.CustomerClientSide;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpSession;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Backend_api.Customer.customer;
 import com.example.Backend_api.Customer.customerService;
-import com.example.Backend_api.deal.Deal;
+import com.example.Backend_api.Review.reviewService;
 import com.example.Backend_api.deal.DealService;
-import com.example.Backend_api.dealer.Dealer;
 import com.example.Backend_api.dealer.DealerService;
 import com.example.Backend_api.payment.PaymentService;
-import com.example.Backend_api.payment.Payment;
-import com.example.Backend_api.Review.review;
-import com.example.Backend_api.Review.reviewRepository;
-import com.example.Backend_api.Review.reviewService;
 import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.vehicle.VehicleService;
+
+import jakarta.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -227,28 +227,54 @@ public class CustomerMvcController {
     }
 
     @GetMapping("/vehicles/{id}")
-    public String vehicleDetails(@PathVariable Long id, Model model) {
-        // Long customerId = (Long) session.getAttribute("customerID");
-        // if (customerId == null) {
-        //     return "redirect:/customer/login";
-        // }
+    public String vehicleDetails(@PathVariable Long id, Model model, HttpSession session) {
+        Long customerId = (Long) session.getAttribute("customerID");
         Vehicle vehicle = vehicleService.getVehicleById(id);
         model.addAttribute("vehicle", vehicle);
+        model.addAttribute("customerID", customerId);
+        if (customerId == null) {
+            model.addAttribute("isSaved", false);
+            return "customer/vehicleDetails";
+        }else{
+        model.addAttribute("isSaved", customerService.isVehicleSaved(customerId, id));
+        }
         return "customer/vehicleDetails";
     }
 
-    // @GetMapping("/vehicles/saved")
-    // public String savedVehicles(HttpSession session, Model model) {
-    //     Long customerId = (Long) session.getAttribute("customerID");
-    //     if (customerId == null) {
-    //         return "redirect:/customer/login";
-    //     }
-    //     customer cust = customerService.getCustomerById(customerId);
-    //     List<Vehicle> savedVehicles = cust.getSavedVehicles();
-    //     model.addAttribute("vehicles", savedVehicles);
-    //     return "customer/savedVehicles";
-    // }
+    @GetMapping("/vehicle/saved/{vehicleId}")
+    public String addVehicleToSaved(@PathVariable Integer vehicleId, HttpSession session) {
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null) {
+            return "redirect:/customer/login";
+        }
+        customerService.addVehicleToSaved(customerId, vehicleId);
+        return "redirect:/customer/vehicles/" + vehicleId;
+    }
 
+    @GetMapping("/vehicle/saved/remove/{vehicleId}")
+    public String removeVehicleFromSaved(@PathVariable Integer vehicleId, HttpSession session) {
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null) {
+            return "redirect:/customer/login";
+        }
+        customerService.removeVehicleFromSaved(customerId, vehicleId);
+        return "redirect:/customer/vehicles/" + vehicleId;
+    }
+ 
+    @GetMapping("/vehicles/saved")
+    public String savedVehicles(HttpSession session, Model model) {
+        Long customerId = (Long) session.getAttribute("customerID");
+        if (customerId == null) {
+            return "redirect:/customer/login";
+        }
+        List<Vehicle> savedVehicles = customerService.getSavedVehicleIds(customerId);
+        model.addAttribute("savedVehicles", savedVehicles);
+        return "customer/savedVehicles";
+    }
+
+
+
+  /*
     @GetMapping("/vehicles/{dealerId}/reviews")
     public String dealerReviews(@PathVariable Long dealerId, Model model, HttpSession session)
     {
@@ -274,5 +300,5 @@ public class CustomerMvcController {
         model.addAttribute("review", new review());
         return "customer/newReviewForm";
     }
-
+*/
 }

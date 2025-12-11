@@ -308,11 +308,17 @@
                 </div>
             </div>
 
+            <#if customerID??>
             <div class="action-buttons">
                 <a href="/customer/dashboard" class="btn btn-primary">Back to Dashboard</a>
-                <button class="btn btn-success">Save Vehicle</button>
+                <#if isSaved?? && isSaved>
+                    <a href="/customer/vehicle/saved/remove/${vehicle.id}" class="btn btn-success">Removed Saved Vehicle</a>
+                <#else>
+                <a href="/customer/vehicle/saved/${vehicle.id}" class="btn btn-success">Save Vehicle</a>
+                </#if>
                 <button class="btn btn-primary">Contact Dealer</button>
             </div>
+            </#if>
         </div>
     </div>
 </body>

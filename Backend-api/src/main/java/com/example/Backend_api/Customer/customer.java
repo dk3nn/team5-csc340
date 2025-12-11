@@ -1,12 +1,10 @@
 package com.example.Backend_api.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.ManyToAny;
-
-import com.example.Backend_api.deal.Deal;
-import com.example.Backend_api.vehicle.Vehicle;
 import com.example.Backend_api.Review.review;
+import com.example.Backend_api.deal.Deal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -15,9 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -57,11 +53,8 @@ public class customer {
     @Column(name = "password", nullable = false)
     private String password;
 
-    
+    List<Integer> savedVehicles = new java.util.ArrayList<>();
 
-   // public customer() {
-
-   // }
 
     public customer(String name, String email, String phone, String address, String city, String state, String username, String password) {
         this.name = name;
@@ -72,6 +65,7 @@ public class customer {
         this.state = state;
         this.username = username;
         this.password = password;
+        
     }
 
     public customer(Long cId, String name, String email, String phone, String address, String city, String state, String username, String password) {
@@ -157,6 +151,18 @@ public class customer {
     public void setPassword(String password) {
         this.password = password;
     }
+
+     public List<Integer> getSavedVehicleIds() {
+        if (savedVehicles == null) {
+            savedVehicles = new ArrayList<>();
+        }
+        return savedVehicles;
+    }
+    
+    public void setSavedVehicles(List<Integer> savedVehicles) {
+        this.savedVehicles = savedVehicles;
+    }
+    
 
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
