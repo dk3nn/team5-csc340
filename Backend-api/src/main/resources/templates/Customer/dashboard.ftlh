@@ -366,6 +366,7 @@
 
       <div id="browse">
         <h2>Browse Vehicles</h2>
+        <!---
         <div id="browse-ribbon">
           <label>Search
             <input id="search" type="text" name="inventory-search">
@@ -388,6 +389,7 @@
             <option value="All"></option>
           </datalist>
         </div>
+      -->
         <div id="car-listings">
           <#if vehicles??>
             <#list vehicles as vehicle>
@@ -411,7 +413,7 @@
         <h2>Your Saved Vehicles</h2>
         <div id="car-listings-saved">
           <#if savedVehicles??>
-            <#list savedVehicles as savedVehicles>
+            <#list savedVehicles as vehicle>
               <div class="car-card">
                 <div class="card-body">
                   <h5 class="card-title">${vehicle.name!}</h5>
@@ -422,6 +424,8 @@
                 </div>
               </div>
             </#list>
+            <#else>
+              <p>No vehicles available</p>
           </#if>
         </div>
       </div>
