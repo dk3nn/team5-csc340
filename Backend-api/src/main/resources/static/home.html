@@ -16,10 +16,11 @@
                 <a href="#">About</a>
                 <a href="#">Contact</a>
             </div>
-            <div id="btn-container">
+            <div id="btn-container" style="width: auto; display: flex; flex-direction: row-reverse; gap: 10px;">
                 <button type="button" id="signup-btn">Sign Up</button>
                 <button type="button" id="login-btn">LogIn</button>
                 <button type="button" id="logout-btn" style="display: none;" onclick="signout()">Log Out</button>
+                <button type="button" id="dashboard-btn" style="display: none;" onclick="dealerDashboard()">Dashboard</button>
             </div>
         </div>
         <div id="heading">
@@ -45,6 +46,8 @@
         const signUpButton = document.getElementById('signup-btn');
         const loginButton = document.getElementById('login-btn');
         const logoutButton = document.getElementById('logout-btn');
+        const dashboardButton = document.getElementById('dashboard-btn');
+        let dealerid;
         function signout(){ window.location.href='http://127.0.0.1:8080/api/dealers/signout'; window.location.reload(); }
 
         signUpButton.addEventListener('click', () => {
@@ -54,6 +57,9 @@
             window.location.href = 'provider/login.html';
         });
 
+        function dealerDashboard() {
+            window.location.href = 'http://127.0.0.1:8080/provider/dashboard.html?dealerId='+ dealerid;
+        }
 
     container = document.getElementById('car-listings')
     fetch('http://localhost:8080/api/vehicles/unsold')
@@ -140,7 +146,8 @@
                 signUpButton.style.display = 'none';
                 loginButton.style.display = 'none';
                 logoutButton.style.display = 'block';
-                console.log('Dealer logged in:', dealer);
+                dealerid = dealer.id;
+                dashboardButton.style.display = 'block';
             } else {
                 // No dealer logged in
                 console.log('No dealer logged in');
