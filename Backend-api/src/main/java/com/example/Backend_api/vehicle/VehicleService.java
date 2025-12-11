@@ -1,7 +1,9 @@
 package com.example.Backend_api.vehicle;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -85,6 +87,7 @@ public class VehicleService {
     public List<Vehicle> findByDealerIdAndSold(Long dealerId, Boolean sold) {
         return vehicleRepository.findByDealerIdAndSold(dealerId, sold);
     }
+
 
 
 }
