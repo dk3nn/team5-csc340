@@ -60,9 +60,11 @@
             <div id="login-container">
                 <h1>Customer Log In</h1>
                     <form action="customer/login" method="post">
-                    <label for="customerUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="customerUsername" name="username" required>
-
+                    
+                        <label for="customerUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="customerUsername" name="username" required>
+                    
+                    
                     <label for="customerPassword" class="form-label">Password</label>
                     <input type="password" class="form-control" id="customerPassword" name="password" required>
 

@@ -78,14 +78,11 @@
         <div id="inventory">
             <h2>Inventory</h2>
             <div id="inventory-ribbon">
-            <label>Search
-                <input id="search" type="text" name="inventory-search">
-            </label>
             <label for="filter-values">Filter
             <select id="filter-values">
-                <option selected value="All">All</option>
-                <option value="Sold">Sold</option>
-                <option value="Unsold">Unsold</option>
+                <option selected value="all">All</option>
+                <option value="sold">Sold</option>
+                <option value="unsold">Unsold</option>
             </select>
             </label>
             </div>
@@ -345,17 +342,30 @@
     });
 
     // Car listings in the inventory section
-    container = document.getElementById('dashboard-car-listings')
+    container = document.getElementById('dashboard-car-listings');
+    filterSelect = document.getElementById('filter-values');
+    if(filterSelect){
+        filterSelect.addEventListener('change', () => {
+            if(filterSelect.value == "all")
+                filterSelectValue = "";
+            else{
+                filterSelectValue = "/" + filterSelect.value;
+            }
+
+            fetch("http:////127.0.0.1:8080/api/vehicles/dealer"+ filterSelectValue + "/" + dealerId)
+            .then(response => response.json())
+            .then(carInventory => { 
+                populateInventory(carInventory);
+            });
+        });
+    }
+
     fetch("http://127.0.0.1:8080/api/vehicles/dealer/" + dealerId)
         .then(response => response.json())
         .then(carInventory => { 
             populateInventory(carInventory);
     });
 
-    //filter and search functionality
-    const filterSelect = document.getElementById('filter-values');
-    const searchInput = document.getElementById('search');
-   ;
 
     function populateInventory(carInventory){
         container.innerHTML = '';
@@ -427,7 +437,7 @@
             });
 
             detailButton.addEventListener('click', () => {
-                window.location.href = `vehicle-details.html?vehicleId=${car.id}`;
+                window.location.href = 'http://127.0.0.1:8080/customer/vehicles/' + car.id;
             });
 
             sellBtn.addEventListener('click', () => {
@@ -571,7 +581,7 @@
 
     // payments handling
     const paymentTable = document.getElementById('payment-table');
-    fetch("http://127.0.0.1:8080/api/payment")
+    fetch("http://127.0.0.1:8080/api/payment/dealer/" + dealerId)
     .then(response => response.json())
     .then(data => {
         data.forEach(payment => {

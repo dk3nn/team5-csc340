@@ -22,13 +22,13 @@ public class review {
     
     @ManyToOne
     @JoinColumn(name = "customer_cId", nullable = false)
-    @JsonIgnoreProperties({"reviews", "dealer", "customer"})
+    @JsonIgnoreProperties({"reviews", "dealer", "customer", "payments"})
     private customer customer;
 
    
     @ManyToOne
     @JoinColumn(name = "dealer_id", nullable = false)
-    @JsonIgnoreProperties({"reviews", "deals", "vehicles"})
+    @JsonIgnoreProperties({"reviews", "deals", "vehicles"," payments"})
     private Dealer dealer;
 
     
